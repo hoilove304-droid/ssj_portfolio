@@ -714,11 +714,16 @@
               <li>setInterval 기반 30초 폴링으로 컴포넌트 언마운트 시 clearInterval 처리하여 메모리 누수 방지</li>
               <li>은행 드롭다운 선택 시 동일 API(/api/dashboard/{bankCode}) 재호출로 데이터 전환</li>
             </ul>
-            <div class="sub-label">연관 요구사항</div>
-            <div class="req-chips">
-              <span class="req-chip">ADM-001</span><span class="req-chip">ADM-002</span>
-              <span class="req-chip">ADM-003</span><span class="req-chip">ADM-007</span>
-              <span class="req-chip">ADM-013</span>
+            <div class="sub-label">요구사항 정의서 발췌</div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <tr><th style="width:90px">기능 ID</th><th>요구사항</th><th style="width:80px;text-align:center">우선순위</th></tr>
+                <tr><td class="td-mono">ADM-001</td><td>관리자 권한 사용자만 접근 가능, 비관리자 접근 시 리다이렉트</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">ADM-002</td><td>전체 은행의 이상 감지 수치를 한 화면에서 조회</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">ADM-003</td><td>각 은행 이상 수치를 그래프로 시각화</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">ADM-007</td><td>은행별 이상 거래를 종합한 점수 표시</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">ADM-013</td><td>신규 은행 추가 시 별도 수정 없이 목록에 자동 포함</td><td style="text-align:center"><span class="badge-part">중</span></td></tr>
+              </table>
             </div>
           </div>
         </div>
@@ -746,11 +751,16 @@
               <li>CustomerRoute: 은행 코드 검증 + 고객이 해당 은행 소속인지 복합 조건으로 이중 검증</li>
               <li>fraudScore에 따라 위험도 색상 조건부 스타일링 (고위험: 빨강 / 중위험: 주황 / 저위험: 파랑)</li>
             </ul>
-            <div class="sub-label">연관 요구사항</div>
-            <div class="req-chips">
-              <span class="req-chip">BNK-001</span><span class="req-chip">BNK-002</span>
-              <span class="req-chip">BNK-003</span><span class="req-chip">BNK-011</span>
-              <span class="req-chip">BNK-012</span>
+            <div class="sub-label">요구사항 정의서 발췌</div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <tr><th style="width:90px">기능 ID</th><th>요구사항</th><th style="width:80px;text-align:center">우선순위</th></tr>
+                <tr><td class="td-mono">BNK-001</td><td>소속 은행 기준 이상 거래 데이터 조회</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">BNK-002</td><td>fraudScore 및 패턴 텍스트 표시</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">BNK-003</td><td>고객명 클릭 시 고객 상세 페이지로 이동</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">BNK-011</td><td>URL 조작으로 타 은행 접근 불가 — 서버 단 검증</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">BNK-012</td><td>이상 거래 없을 시 Empty State UI 표시</td><td style="text-align:center"><span class="badge-part">중</span></td></tr>
+              </table>
             </div>
           </div>
         </div>
@@ -777,10 +787,15 @@
               <li>TO_DATE(#{txDatetime}, 'YYYY-MM-DD"T"HH24:MI') — ISO 8601 형식 날짜 Oracle 파싱</li>
               <li>fraudScore 초기 0 저장 후 Flask 예측 결과로 UPDATE 처리하여 응답 지연 분리</li>
             </ul>
-            <div class="sub-label">연관 요구사항</div>
-            <div class="req-chips">
-              <span class="req-chip">TX-001</span><span class="req-chip">TX-002</span>
-              <span class="req-chip">TX-003</span><span class="req-chip">ADM-002</span>
+            <div class="sub-label">요구사항 정의서 발췌</div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <tr><th style="width:90px">기능 ID</th><th>요구사항</th><th style="width:80px;text-align:center">우선순위</th></tr>
+                <tr><td class="td-mono">TX-001</td><td>12개 필드 입력 폼 제공 — 필드별 null/빈값 검증</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">TX-002</td><td>Oracle 시퀀스로 TX_ID 자동 채번 후 저장</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">TX-003</td><td>저장 후 Flask /predict 호출하여 AI 예측 결과 업데이트</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">ADM-002</td><td>입력된 거래 데이터를 관리자 대시보드에 반영</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+              </table>
             </div>
           </div>
         </div>
@@ -864,11 +879,16 @@
               <li>FullCalendar eventClick으로 기존 일정 데이터를 모달에 로드하여 수정 흐름 구현</li>
               <li>GET /api/schedules?userId= 로 컴포넌트 마운트 시 사용자별 일정 일괄 조회</li>
             </ul>
-            <div class="sub-label">연관 요구사항</div>
-            <div class="req-chips">
-              <span class="req-chip">SCH-001</span><span class="req-chip">SCH-002</span>
-              <span class="req-chip">SCH-003</span><span class="req-chip">SCH-004</span>
-              <span class="req-chip">SCH-005</span>
+            <div class="sub-label">요구사항 정의서 발췌</div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <tr><th style="width:90px">기능 ID</th><th>요구사항</th><th style="width:80px;text-align:center">우선순위</th></tr>
+                <tr><td class="td-mono">SCH-001</td><td>FullCalendar 기반 월간/주간/일간 뷰 전환</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">SCH-002</td><td>날짜 클릭 시 일정 등록 모달 오픈</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">SCH-003</td><td>이벤트 클릭 시 기존 데이터 로드하여 수정</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">SCH-004</td><td>일정 삭제 — 확인 후 제거</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">SCH-005</td><td>userId 기준으로 본인 일정만 조회</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+              </table>
             </div>
           </div>
         </div>
@@ -896,10 +916,15 @@
               <li>출퇴근 상태(BEFORE / CHECKED_IN / CHECKED_OUT)를 enum으로 관리하여 UI 조건부 렌더링</li>
               <li>출근 시각과 퇴근 시각의 차이로 근무 시간 자동 계산하여 표시</li>
             </ul>
-            <div class="sub-label">연관 요구사항</div>
-            <div class="req-chips">
-              <span class="req-chip">ATT-001</span><span class="req-chip">ATT-002</span>
-              <span class="req-chip">ATT-003</span><span class="req-chip">ATT-004</span>
+            <div class="sub-label">요구사항 정의서 발췌</div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <tr><th style="width:90px">기능 ID</th><th>요구사항</th><th style="width:80px;text-align:center">우선순위</th></tr>
+                <tr><td class="td-mono">ATT-001</td><td>출근/퇴근 버튼 클릭 시 현재 시각 DB 기록</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">ATT-002</td><td>오늘 날짜 카운트 기반 중복 출근 방지</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">ATT-003</td><td>출근 전 / 출근 완료 / 퇴근 완료 3단계 상태 표시</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">ATT-004</td><td>페이지 접속 시 오늘 출퇴근 상태 자동 조회</td><td style="text-align:center"><span class="badge-part">중</span></td></tr>
+              </table>
             </div>
           </div>
         </div>
@@ -998,10 +1023,15 @@
               <li>SHAP TreeExplainer → 상위 8개 피처 추출 → matplotlib barh → base64 PNG 직렬화</li>
               <li>NumPy float32 직렬화 오류 해결: round(float(val), 4)로 Python 기본 float 변환 후 jsonify()</li>
             </ul>
-            <div class="sub-label">연관 요구사항</div>
-            <div class="req-chips">
-              <span class="req-chip">AI-001</span><span class="req-chip">AI-002</span>
-              <span class="req-chip">AI-003</span><span class="req-chip">BNK-006</span>
+            <div class="sub-label">요구사항 정의서 발췌</div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <tr><th style="width:90px">기능 ID</th><th>요구사항</th><th style="width:80px;text-align:center">우선순위</th></tr>
+                <tr><td class="td-mono">AI-001</td><td>고객 정보 + 거래 내역 + AI 예측 결과를 한 화면에 표시</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">AI-002</td><td>SHAP 바 차트로 피처별 기여도 시각화</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">AI-003</td><td>사기 확률에 따라 위험도 색상 조건부 표시</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">BNK-006</td><td>고객의 거래 항목별 이상 점수를 영역별로 표시</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+              </table>
             </div>
           </div>
         </div>
@@ -1095,11 +1125,17 @@
               <li>읽음 처리: 채팅방 진입 시 IS_READ = 0인 메시지 전체 UPDATE — 뱃지 카운트 즉시 갱신</li>
               <li>채팅 상태를 컴포넌트 state로 관리하여 모달 재오픈 시 이전 대화 상태 유지</li>
             </ul>
-            <div class="sub-label">연관 요구사항</div>
-            <div class="req-chips">
-              <span class="req-chip tel">CH-001</span><span class="req-chip tel">CH-002</span>
-              <span class="req-chip tel">CH-003</span><span class="req-chip tel">CH-006</span>
-              <span class="req-chip tel">CH-007</span><span class="req-chip tel">CH-008</span>
+            <div class="sub-label">요구사항 정의서 발췌</div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <tr><th style="width:90px">기능 ID</th><th>요구사항</th><th style="width:80px;text-align:center">우선순위</th></tr>
+                <tr><td class="td-mono">CH-001</td><td>사이드바 채팅 버튼 클릭 시 모달 토글</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">CH-002</td><td>대화 상대 목록에서 선택 시 채팅방 오픈</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">CH-003</td><td>발신/수신 메시지 좌우 말풍선 구분 표시</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">CH-006</td><td>읽지 않은 메시지 뱃지 표시</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">CH-007</td><td>채팅방 목록에 최근 메시지 미리보기 표시</td><td style="text-align:center"><span class="badge-part">중</span></td></tr>
+                <tr><td class="td-mono">CH-008</td><td>읽음 처리 — IS_READ 업데이트로 뱃지 카운트 갱신</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+              </table>
             </div>
           </div>
         </div>
@@ -1125,10 +1161,14 @@
               <li>localStorage의 bankCode와 role을 기준으로 채팅 가능 대상 목록 API 파라미터 분기</li>
               <li>프론트 필터링 + 백엔드 검증 이중 구조 — URL 직접 조작 시에도 서버 단에서 차단</li>
             </ul>
-            <div class="sub-label">연관 요구사항</div>
-            <div class="req-chips">
-              <span class="req-chip tel">CH-015</span><span class="req-chip tel">CH-016</span>
-              <span class="req-chip tel">CH-017</span>
+            <div class="sub-label">요구사항 정의서 발췌</div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <tr><th style="width:90px">기능 ID</th><th>요구사항</th><th style="width:80px;text-align:center">우선순위</th></tr>
+                <tr><td class="td-mono">CH-015</td><td>관리자는 전체 유저와 채팅 가능 — 전체 목록 조회</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">CH-016</td><td>은행 사용자는 동일 bankCode + 관리자(01)만 채팅 가능</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">CH-017</td><td>은행 간 직접 채팅 차단 — 프론트 필터링 + 백엔드 이중 검증</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+              </table>
             </div>
           </div>
         </div>
@@ -1202,11 +1242,16 @@
               <li>ROWNUM 페이징 오류 해결: 서브쿼리에서 ORDER BY 먼저 → 외부 쿼리에서 ROWNUM 필터 적용</li>
               <li>UUID 파일명으로 동일 파일명 충돌 방지, /uploads/** 정적 경로 매핑으로 서빙</li>
             </ul>
-            <div class="sub-label">연관 요구사항</div>
-            <div class="req-chips">
-              <span class="req-chip pur">BRD-001</span><span class="req-chip pur">BRD-002</span>
-              <span class="req-chip pur">BRD-005</span><span class="req-chip pur">BRD-006</span>
-              <span class="req-chip pur">BRD-007</span><span class="req-chip pur">BRD-013</span>
+            <div class="sub-label">요구사항 정의서 발췌</div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <tr><th style="width:90px">기능 ID</th><th>요구사항</th><th style="width:80px;text-align:center">우선순위</th></tr>
+                <tr><td class="td-mono">BRD-001</td><td>게시글 목록을 테이블 형태로 표시</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">BRD-005</td><td>제목 또는 내용 기준 키워드 검색</td><td style="text-align:center"><span class="badge-part">중</span></td></tr>
+                <tr><td class="td-mono">BRD-006</td><td>ROWNUM 기반 10건씩 서버 사이드 페이징</td><td style="text-align:center"><span class="badge-part">중</span></td></tr>
+                <tr><td class="td-mono">BRD-007</td><td>파일 첨부 — multipart 업로드, UUID 파일명 저장</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">BRD-013</td><td>boardConfig.js로 4종 게시판 통합 관리</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+              </table>
             </div>
           </div>
         </div>
@@ -1233,11 +1278,17 @@
               <li>DEPTH(LEVEL - 1)를 프론트에서 받아 들여쓰기(padding-left: depth * 16px)로 답글 시각화</li>
               <li>role 기반 버튼 조건부 렌더링 — boardConfig의 canWrite/canEdit 값으로 컴포넌트에서 분기</li>
             </ul>
-            <div class="sub-label">연관 요구사항</div>
-            <div class="req-chips">
-              <span class="req-chip pur">BRD-018</span><span class="req-chip pur">BRD-021</span>
-              <span class="req-chip pur">BRD-022</span><span class="req-chip pur">BRD-023</span>
-              <span class="req-chip pur">BRD-024</span><span class="req-chip pur">BRD-025</span>
+            <div class="sub-label">요구사항 정의서 발췌</div>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <tr><th style="width:90px">기능 ID</th><th>요구사항</th><th style="width:80px;text-align:center">우선순위</th></tr>
+                <tr><td class="td-mono">BRD-018</td><td>공지사항 글쓰기·수정은 관리자만 가능</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">BRD-021</td><td>FAQ는 질문/답변 아코디언 형식으로 표시</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">BRD-022</td><td>FAQ 수정 권한 관리자 제한</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">BRD-023</td><td>특정 게시글 목록 상단 고정 표시</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">BRD-024</td><td>CONNECT BY PRIOR로 계층형 답글 트리 구조</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">BRD-025</td><td>게시판별 접근 권한을 role에 따라 제한</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+              </table>
             </div>
           </div>
         </div>
