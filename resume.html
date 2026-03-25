@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이력서 · 손세진</title>
+<link rel="stylesheet" href="assets/nav.css">
+<style>
+.resume-wrap {
+  max-width: 760px; margin: 0 auto;
+  padding: 40px 32px 60px;
+}
+.resume-top {
+  display: flex; gap: 20px; align-items: flex-start;
+  padding-bottom: 28px; border-bottom: 0.5px solid var(--border);
+  margin-bottom: 28px;
+}
+.avatar {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: var(--accent-dim); border: 0.5px solid rgba(79,142,247,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 500; color: var(--accent2);
+  flex-shrink: 0;
+}
+.resume-name { font-size: 24px; font-weight: 300; color: var(--text); letter-spacing: -0.5px; margin-bottom: 6px; }
+.resume-name strong { font-weight: 500; }
+.resume-contact { font-size: 12px; color: var(--text2); line-height: 1.9; }
+.resume-contact a { color: var(--accent2); text-decoration: none; }
+
+.rs { margin-bottom: 28px; }
+.rs-title {
+  font-size: 10px; font-weight: 500; color: var(--text3);
+  text-transform: uppercase; letter-spacing: 0.1em;
+  margin-bottom: 12px; padding-bottom: 8px;
+  border-bottom: 0.5px solid var(--border);
+}
+
+/* 기술스택 */
+.skill-group { margin-bottom: 10px; }
+.skill-group-label { font-size: 10px; color: var(--text3); margin-bottom: 5px; }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.chip {
+  font-family: var(--mono); font-size: 10px;
+  padding: 3px 9px; border-radius: 5px;
+  background: var(--surface); border: 0.5px solid var(--border);
+  color: var(--text2);
+}
+.chip.hl { background: var(--accent-dim); border-color: rgba(79,142,247,0.3); color: var(--accent2); }
+
+/* 경력 */
+.career-list { display: flex; flex-direction: column; gap: 16px; }
+.career-item { display: grid; grid-template-columns: 110px 1fr; gap: 16px; }
+.career-left { }
+.career-period { font-size: 11px; color: var(--text3); line-height: 1.6; font-family: var(--mono); }
+.career-dur    { font-size: 10px; color: var(--text3); opacity: 0.6; margin-top: 2px; }
+.career-company { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+.career-role-badge {
+  display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 4px;
+  background: var(--accent-dim); color: var(--accent2);
+  border: 0.5px solid rgba(79,142,247,0.25); margin-bottom: 6px;
+}
+.career-desc { font-size: 12px; color: var(--text2); line-height: 1.8; }
+.career-link { font-size: 10px; color: var(--accent2); font-family: var(--mono); line-height: 2; }
+.career-link a { color: var(--accent2); text-decoration: none; }
+.career-link a:hover { text-decoration: underline; }
+
+/* 교육 */
+.edu-item { display: grid; grid-template-columns: 110px 1fr; gap: 16px; margin-bottom: 16px; }
+.edu-item:last-child { margin-bottom: 0; }
+.edu-school { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+.edu-major  { font-size: 12px; color: var(--text2); }
+.edu-period { font-size: 11px; color: var(--text3); font-family: var(--mono); }
+
+/* 교육이수 */
+.training-item { display: grid; grid-template-columns: 110px 1fr; gap: 16px; }
+.training-org { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+.training-desc { font-size: 12px; color: var(--text2); line-height: 1.8; }
+.training-sub { font-size: 11px; color: var(--text3); margin-top: 4px; font-weight: 500; }
+
+/* 자격증 */
+.cert-list { display: flex; flex-direction: column; gap: 0; }
+.cert-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 0; border-bottom: 0.5px solid var(--border);
+}
+.cert-item:last-child { border-bottom: none; }
+.cert-name { font-size: 13px; font-weight: 500; color: var(--text); }
+.cert-right { text-align: right; }
+.cert-date { font-size: 11px; color: var(--text2); font-family: var(--mono); }
+.cert-org  { font-size: 10px; color: var(--text3); margin-top: 2px; }
+
+/* 포트폴리오 */
+.port-list { display: flex; flex-direction: column; gap: 12px; }
+.port-item {
+  background: var(--surface); border: 0.5px solid var(--border);
+  border-radius: var(--radius); padding: 14px 16px;
+}
+.port-link { font-size: 11px; color: var(--accent2); font-family: var(--mono); text-decoration: none; display: block; margin-bottom: 5px; }
+.port-link:hover { text-decoration: underline; }
+.port-desc { font-size: 12px; color: var(--text2); line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-brand">손세진 <span>·</span></a>
+  <div class="nav-sep"></div>
+  <ul>
+    <li><a href="index.html">포트폴리오</a></li>
+    <li><a href="screens.html">구현 화면</a></li>
+    <li><a href="resume.html" class="active">이력서</a></li>
+    <li><a href="cover-letter.html">자기소개서</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+<div class="resume-wrap">
+
+  <!-- 헤더 -->
+  <div class="resume-top">
+    <div class="avatar">손</div>
+    <div>
+      <div class="resume-name"><strong>손세진</strong></div>
+      <div class="resume-contact">
+        여 · 1992년생 (만 33세)<br>
+        📧 <a href="mailto:vnemf2004@naver.com">vnemf2004@naver.com</a> &nbsp;·&nbsp;
+        📱 010-9252-7894<br>
+        📍 서울 동작구 상도로
+      </div>
+    </div>
+  </div>
+
+  <!-- 기술 스택 -->
+  <div class="rs">
+    <div class="rs-title">기술 스택</div>
+    <div class="skill-group">
+      <div class="skill-group-label">프론트엔드</div>
+      <div class="chips">
+        <span class="chip hl">React</span>
+        <span class="chip hl">JavaScript</span>
+        <span class="chip">HTML5</span>
+        <span class="chip">CSS3</span>
+        <span class="chip">Vue 3</span>
+        <span class="chip">jQuery</span>
+        <span class="chip">Bootstrap</span>
+        <span class="chip">Ajax</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">백엔드 / 서버</div>
+      <div class="chips">
+        <span class="chip hl">Spring Boot</span>
+        <span class="chip hl">MyBatis</span>
+        <span class="chip">Java</span>
+        <span class="chip">JSP</span>
+        <span class="chip">Node.js</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">DB / AI</div>
+      <div class="chips">
+        <span class="chip hl">Oracle DB</span>
+        <span class="chip">SQL</span>
+        <span class="chip">Python</span>
+        <span class="chip">Flask</span>
+        <span class="chip">Django</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">기타</div>
+      <div class="chips">
+        <span class="chip">Figma</span>
+        <span class="chip">API</span>
+        <span class="chip">퍼블리싱</span>
+        <span class="chip">크로스브라우징</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 경력 -->
+  <div class="rs">
+    <div class="rs-title">경력 · 총 7년</div>
+    <div class="career-list">
+      <div class="career-item">
+        <div class="career-left">
+          <div class="career-period">2024.03 – 2025.04</div>
+          <div class="career-dur">1년 2개월</div>
+        </div>
+        <div>
+          <div class="career-company">㈜아이스캔디</div>
+          <span class="career-role-badge">퍼블리셔</span>
+          <div class="career-desc">
+            교과서 전자 저작물 제작(퍼블리싱)<br>
+            접근성 개선 작업
+          </div>
+          <div class="career-link">
+            <a href="https://hoilove304-droid.github.io/sj_pub_monami/" target="_blank">→ hoilove304-droid.github.io/sj_pub_monami/</a><br>
+            <a href="https://hoilove304-droid.github.io/sj_pub_sidmool/" target="_blank">→ hoilove304-droid.github.io/sj_pub_sidmool/</a><br>
+            <a href="https://hoilove304-droid.github.io/sj_pub_tailimPaper/" target="_blank">→ hoilove304-droid.github.io/sj_pub_tailimPaper/</a>
+          </div>
+        </div>
+      </div>
+      <div class="career-item">
+        <div class="career-left">
+          <div class="career-period">2018.08 – 2020.07</div>
+          <div class="career-dur">2년</div>
+        </div>
+        <div>
+          <div class="career-company">㈜샵핑</div>
+          <span class="career-role-badge">바이럴마케팅</span>
+          <div class="career-desc">미용 관련 업체 블로그·카페 바이럴 마케팅 · 체험단 관리</div>
+        </div>
+      </div>
+      <div class="career-item">
+        <div class="career-left">
+          <div class="career-period">2015.10 – 2018.05</div>
+          <div class="career-dur">2년 8개월</div>
+        </div>
+        <div>
+          <div class="career-company">에이제이타이어베이㈜</div>
+          <span class="career-role-badge">마케팅</span>
+          <div class="career-desc">
+            G마켓, 옥션 입점 관리(MD 직무)<br>
+            자사 홈페이지 기획전 기획<br>
+            자사 광고대행사 컨트롤 (키워드 광고, 바이럴 광고)<br>
+            자사 홈페이지 제작 시 홈페이지 기획<br>
+            자사 오프라인 매장 오픈 관련 행사 컨트롤
+          </div>
+        </div>
+      </div>
+      <div class="career-item">
+        <div class="career-left">
+          <div class="career-period">2013.07 – 2014.08</div>
+          <div class="career-dur">1년 2개월</div>
+        </div>
+        <div>
+          <div class="career-company">㈜애드플래너</div>
+          <span class="career-role-badge">바이럴마케팅</span>
+          <div class="career-desc">병원·의원 블로그·카페 바이럴 마케팅 · 지식인 · 검색 및 키워드 광고</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 학력 -->
+  <div class="rs">
+    <div class="rs-title">학력</div>
+    <div class="edu-item">
+      <div class="edu-period">졸업</div>
+      <div>
+        <div class="edu-school">광운대학교 정보과학교육원 (4년제)</div>
+        <div class="edu-major">경영학</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 교육 이수 -->
+  <div class="rs">
+    <div class="rs-title">교육 이수</div>
+    <div class="training-item">
+      <div class="edu-period" style="font-size:11px;color:var(--text3);font-family:var(--mono)">2025.09 – 2026.03</div>
+      <div>
+        <div class="training-org">휴먼IT교육센터</div>
+        <div class="training-sub">서비스 기획 및 설계</div>
+        <div class="training-desc">프로젝트 요구사항 정의 및 기능 명세 작성 · 메뉴 구조도 및 와이어프레임 작성 · 사용자 흐름을 고려한 서비스 구조 설계</div>
+        <div class="training-sub" style="margin-top:8px">웹 서비스 개발</div>
+        <div class="training-desc">HTML/CSS/JS 기반 UI 구현 · Ajax 비동기 통신 · Bootstrap / Vue 반응형 UI</div>
+        <div class="training-sub" style="margin-top:8px">웹 애플리케이션 아키텍처</div>
+        <div class="training-desc">Java OOP · JSP/Servlet · Spring Boot MVC / REST API</div>
+        <div class="training-sub" style="margin-top:8px">데이터 처리 및 분석</div>
+        <div class="training-desc">SQL · Python 데이터 처리 · 머신러닝 모델 실습 · Kaggle 데이터셋 탐색</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 자격증 -->
+  <div class="rs">
+    <div class="rs-title">자격증</div>
+    <div class="cert-list">
+      <div class="cert-item">
+        <div class="cert-name">웹디자인개발기능사</div>
+        <div class="cert-right"><div class="cert-date">2023.09</div><div class="cert-org">한국산업인력공단</div></div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-name">GTQ 1급 (그래픽기술자격)</div>
+        <div class="cert-right"><div class="cert-date">2023.06</div><div class="cert-org">한국생산성본부</div></div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-name">ACP (Adobe Certified Professional)</div>
+        <div class="cert-right"><div class="cert-date">2023.05</div><div class="cert-org">ADOBE</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 포트폴리오 -->
+  <div class="rs">
+    <div class="rs-title">포트폴리오</div>
+    <div class="port-list">
+      <div class="port-item">
+        <a href="https://hoilove304-droid.github.io/sj_pub_sidmool/" target="_blank" class="port-link">hoilove304-droid.github.io/sj_pub_sidmool/</a>
+        <div class="port-desc">노후화된 화장품 브랜드 홈페이지를 분석하여 브랜드 이미지와 사용자 흐름을 고려해 리뉴얼한 웹사이트</div>
+      </div>
+      <div class="port-item">
+        <a href="https://hoilove304-droid.github.io/sj_pub_tailimPaper/" target="_blank" class="port-link">hoilove304-droid.github.io/sj_pub_tailimPaper/</a>
+        <div class="port-desc">기존 가로 스크롤 방식의 기업 홈페이지를 사용자 접근성을 고려한 세로 스크롤 형태로 재구성한 리뉴얼 웹사이트</div>
+      </div>
+      <div class="port-item">
+        <a href="https://hoilove304-droid.github.io/sj_pub_monami/" target="_blank" class="port-link">hoilove304-droid.github.io/sj_pub_monami/</a>
+        <div class="port-desc">문구 브랜드 특성을 고려하여 가로 스크롤 UI를 적용하고, 브랜드 분위기에 맞는 인터렉션 중심으로 제작한 웹사이트</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+</body>
+</html>

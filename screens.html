@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>구현 화면 · 손세진 포트폴리오</title>
+<link rel="stylesheet" href="assets/nav.css">
+<style>
+.page-header { padding: 40px 32px 28px; border-bottom: 0.5px solid var(--border); }
+.page-header h1 { font-size: 24px; font-weight: 300; color: var(--text); letter-spacing: -0.5px; margin-bottom: 6px; }
+.page-header h1 strong { font-weight: 500; }
+.page-header p { font-size: 13px; color: var(--text2); }
+
+.screen-section { margin-bottom: 36px; }
+.screen-section-title {
+  font-size: 11px; font-weight: 500; color: var(--text3);
+  text-transform: uppercase; letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+.screens-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.screen-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color .2s;
+}
+.screen-card:hover { border-color: var(--border2); }
+.screen-img {
+  width: 100%; aspect-ratio: 16/9;
+  background: var(--bg3);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px;
+  border-bottom: 0.5px solid var(--border);
+}
+.screen-img .img-placeholder { font-size: 28px; opacity: 0.4; }
+.screen-img .img-label { font-size: 10px; color: var(--text3); font-family: var(--mono); }
+.screen-info { padding: 12px 14px; }
+.screen-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.screen-desc { font-size: 11px; color: var(--text2); line-height: 1.6; }
+.screen-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 8px; }
+.screen-tag { font-size: 10px; padding: 2px 7px; border-radius: 4px; background: var(--bg3); border: 0.5px solid var(--border); color: var(--text3); font-family: var(--mono); }
+
+.upload-note {
+  background: rgba(79,142,247,0.06);
+  border: 0.5px solid rgba(79,142,247,0.2);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  font-size: 12px; color: var(--text2); line-height: 1.7;
+  margin-bottom: 24px;
+}
+.upload-note strong { color: var(--accent2); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-brand">손세진 <span>·</span></a>
+  <div class="nav-sep"></div>
+  <ul>
+    <li><a href="index.html">포트폴리오</a></li>
+    <li><a href="screens.html" class="active">구현 화면</a></li>
+    <li><a href="resume.html">이력서</a></li>
+    <li><a href="cover-letter.html">자기소개서</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <div class="page-header">
+    <h1>FIN FLOW <strong>GUARD</strong> — 구현 화면</h1>
+    <p>프로젝트 주요 화면 캡처 모음</p>
+  </div>
+
+  <div class="inner" style="padding-top:28px">
+    <div class="upload-note">
+      <strong>이미지 교체 안내</strong> — 아래 각 카드의 회색 영역에 실제 캡처 이미지를 넣으려면<br>
+      <code style="font-size:10px; background:var(--bg3); padding:1px 5px; border-radius:3px;">&lt;img src="assets/screenshots/파일명.png" style="width:100%"&gt;</code> 로 교체하면 됩니다.
+    </div>
+
+    <!-- 인증 / 권한 -->
+    <div class="screen-section">
+      <div class="screen-section-title">인증 &amp; 권한</div>
+      <div class="screens-grid">
+        <div class="screen-card">
+          <div class="screen-img">
+            <div class="img-placeholder">🔐</div>
+            <div class="img-label">login.png</div>
+          </div>
+          <div class="screen-info">
+            <div class="screen-name">로그인</div>
+            <div class="screen-desc">은행코드 + 아이디 + 비밀번호 입력 폼. role에 따라 /admin 또는 /bank/:bankCode로 자동 분기.</div>
+            <div class="screen-tags"><span class="screen-tag">localStorage</span><span class="screen-tag">role 분기</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 대시보드 -->
+    <div class="screen-section">
+      <div class="screen-section-title">대시보드</div>
+      <div class="screens-grid">
+        <div class="screen-card">
+          <div class="screen-img">
+            <div class="img-placeholder">📊</div>
+            <div class="img-label">admin-dashboard.png</div>
+          </div>
+          <div class="screen-info">
+            <div class="screen-name">관리자 대시보드</div>
+            <div class="screen-desc">전 은행 이상 거래 통합 모니터링. 은행 드롭다운 전환, 시간대별·월별 차트, 30초 폴링 자동 갱신.</div>
+            <div class="screen-tags"><span class="screen-tag">Admin 전용</span><span class="screen-tag">30초 폴링</span><span class="screen-tag">차트</span></div>
+          </div>
+        </div>
+        <div class="screen-card">
+          <div class="screen-img">
+            <div class="img-placeholder">🏦</div>
+            <div class="img-label">bank-dashboard.png</div>
+          </div>
+          <div class="screen-info">
+            <div class="screen-name">은행 대시보드</div>
+            <div class="screen-desc">자행 이상 거래 목록. BankRoute 가드로 타행 접근 차단. fraudScore + 패턴 텍스트 표시.</div>
+            <div class="screen-tags"><span class="screen-tag">BankRoute</span><span class="screen-tag">fraudScore</span><span class="screen-tag">patternText</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI 예측 -->
+    <div class="screen-section">
+      <div class="screen-section-title">AI 예측</div>
+      <div class="screens-grid">
+        <div class="screen-card">
+          <div class="screen-img">
+            <div class="img-placeholder">🤖</div>
+            <div class="img-label">customer-detail.png</div>
+          </div>
+          <div class="screen-info">
+            <div class="screen-name">고객 상세 페이지</div>
+            <div class="screen-desc">고객 정보 + 현재 거래 + AI 예측 결과(사기 확률 %) + SHAP 시각화를 한 화면에 표시.</div>
+            <div class="screen-tags"><span class="screen-tag">XGBoost</span><span class="screen-tag">SHAP</span><span class="screen-tag">base64 PNG</span></div>
+          </div>
+        </div>
+        <div class="screen-card">
+          <div class="screen-img">
+            <div class="img-placeholder">📈</div>
+            <div class="img-label">tx-input.png</div>
+          </div>
+          <div class="screen-info">
+            <div class="screen-name">거래 데이터 입력</div>
+            <div class="screen-desc">12개 필드 입력 폼. Controller null 검증 후 Oracle 저장. fraudScore = 0 초기화.</div>
+            <div class="screen-tags"><span class="screen-tag">12개 필드</span><span class="screen-tag">NEXTVAL</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 게시판 / 커뮤니티 -->
+    <div class="screen-section">
+      <div class="screen-section-title">게시판</div>
+      <div class="screens-grid">
+        <div class="screen-card">
+          <div class="screen-img">
+            <div class="img-placeholder">📋</div>
+            <div class="img-label">board-list.png</div>
+          </div>
+          <div class="screen-info">
+            <div class="screen-name">게시판 목록</div>
+            <div class="screen-desc">분析의뢰·공지·커뮤니티·FAQ 4종. 10건씩 ROWNUM 페이징. 키워드 검색.</div>
+            <div class="screen-tags"><span class="screen-tag">4종</span><span class="screen-tag">ROWNUM</span><span class="screen-tag">검색</span></div>
+          </div>
+        </div>
+        <div class="screen-card">
+          <div class="screen-img">
+            <div class="img-placeholder">💬</div>
+            <div class="img-label">board-reply.png</div>
+          </div>
+          <div class="screen-info">
+            <div class="screen-name">계층형 답글</div>
+            <div class="screen-desc">CONNECT BY PRIOR 계층형 쿼리로 답글 트리 구조 표현. 들여쓰기로 depth 시각화.</div>
+            <div class="screen-tags"><span class="screen-tag">CONNECT BY</span><span class="screen-tag">depth</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 캘린더 / 출퇴근 / 채팅 -->
+    <div class="screen-section">
+      <div class="screen-section-title">캘린더 &amp; 출퇴근 &amp; 채팅</div>
+      <div class="screens-grid">
+        <div class="screen-card">
+          <div class="screen-img">
+            <div class="img-placeholder">📅</div>
+            <div class="img-label">scheduler.png</div>
+          </div>
+          <div class="screen-info">
+            <div class="screen-name">캘린더 &amp; 출퇴근</div>
+            <div class="screen-desc">FullCalendar 일정 CRUD. 출퇴근 패널 — 오늘 날짜 카운트 기반 중복 출근 방지.</div>
+            <div class="screen-tags"><span class="screen-tag">FullCalendar</span><span class="screen-tag">중복 방지</span></div>
+          </div>
+        </div>
+        <div class="screen-card">
+          <div class="screen-img">
+            <div class="img-placeholder">💬</div>
+            <div class="img-label">chat.png</div>
+          </div>
+          <div class="screen-info">
+            <div class="screen-name">채팅</div>
+            <div class="screen-desc">전 페이지 공통 모달. role별 대상 필터링. 읽음 처리(/api/chat/read) 구현.</div>
+            <div class="screen-tags"><span class="screen-tag">모달</span><span class="screen-tag">role 필터</span><span class="screen-tag">읽음처리</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

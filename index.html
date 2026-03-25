@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>손세진 · FIN FLOW GUARD 포트폴리오</title>
+<link rel="stylesheet" href="assets/nav.css">
+<style>
+/* ── HERO ── */
+.hero {
+  position: relative;
+  padding: 56px 32px 48px;
+  overflow: hidden;
+  border-bottom: 0.5px solid var(--border);
+}
+.hero-bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(79,142,247,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 10% 80%, rgba(45,212,191,0.07) 0%, transparent 60%);
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10px; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent2);
+  background: var(--accent-dim);
+  border: 0.5px solid rgba(79,142,247,0.3);
+  padding: 4px 10px; border-radius: 99px;
+  margin-bottom: 20px;
+}
+.hero-tag::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); display: block; }
+.hero h1 {
+  font-size: 38px; font-weight: 300;
+  letter-spacing: -1px;
+  color: var(--text);
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+.hero h1 strong { font-weight: 500; color: #fff; }
+.hero h1 .hl { color: var(--accent2); }
+.hero-sub {
+  font-size: 13px; color: var(--text2);
+  margin-bottom: 24px;
+}
+.badges { display: flex; flex-wrap: wrap; gap: 5px; }
+.badge {
+  font-family: var(--mono);
+  font-size: 10px; font-weight: 400;
+  padding: 3px 9px; border-radius: 5px;
+  border: 0.5px solid;
+}
+.b-react   { color: #67d6f5; border-color: rgba(97,218,251,0.3); background: rgba(97,218,251,0.08); }
+.b-spring  { color: #86e06a; border-color: rgba(109,195,87,0.3);  background: rgba(109,195,87,0.08); }
+.b-flask   { color: #e0c97a; border-color: rgba(200,170,120,0.3); background: rgba(200,170,120,0.08); }
+.b-xgb    { color: #f08070; border-color: rgba(230,100,80,0.3);  background: rgba(230,100,80,0.08); }
+.b-oracle  { color: #e07060; border-color: rgba(200,60,40,0.3);   background: rgba(200,60,40,0.08); }
+.b-shap   { color: var(--purple); border-color: rgba(167,139,250,0.3); background: var(--purple-dim); }
+.b-mybatis { color: var(--teal); border-color: rgba(45,212,191,0.3); background: var(--teal-dim); }
+
+/* ── OVERVIEW GRID ── */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.ov-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+.ov-label { font-size: 10px; color: var(--text3); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+.ov-val   { font-size: 13px; font-weight: 500; color: var(--text); }
+
+/* ── PS GRID ── */
+.ps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ps-card { border-radius: var(--radius); padding: 16px; }
+.ps-card.prob { background: rgba(229,83,75,0.06); border: 0.5px solid rgba(229,83,75,0.2); }
+.ps-card.sol  { background: rgba(61,214,140,0.06); border: 0.5px solid rgba(61,214,140,0.2); }
+.ps-head { font-size: 11px; font-weight: 500; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.ps-card.prob .ps-head { color: #e5534b; }
+.ps-card.sol  .ps-head { color: var(--green); }
+.ps-item { font-size: 12px; color: var(--text2); line-height: 1.7; display: flex; gap: 7px; }
+.ps-item::before { content: '—'; color: var(--text3); flex-shrink: 0; font-size: 10px; margin-top: 3px; }
+
+/* ── PERSONA TABLE ── */
+.persona-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.persona-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.persona-head {
+  padding: 10px 14px;
+  font-size: 11px; font-weight: 500;
+  border-bottom: 0.5px solid var(--border);
+  display: flex; align-items: center; gap: 8px;
+}
+.persona-head.admin { color: var(--accent2); background: var(--accent-dim); }
+.persona-head.bank  { color: var(--green);   background: var(--green-dim); }
+.persona-body { padding: 12px 14px; }
+.persona-row { font-size: 11px; color: var(--text2); line-height: 1.7; margin-bottom: 4px; display: flex; gap: 6px; }
+.persona-row strong { color: var(--text); min-width: 60px; flex-shrink: 0; }
+
+/* ── MENU TREE ── */
+.tree-wrap {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text2);
+  line-height: 2;
+}
+.tree-wrap .t-root { color: var(--accent2); font-weight: 500; }
+.tree-wrap .t-admin { color: var(--amber); }
+.tree-wrap .t-bank  { color: var(--green); }
+.tree-wrap .t-page  { color: var(--text); }
+.tree-wrap .t-sub   { color: var(--text3); }
+
+/* ── USER FLOW ── */
+.flow-wrap {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  overflow-x: auto;
+}
+.flow-row { display: flex; align-items: center; gap: 0; flex-wrap: nowrap; }
+.flow-box {
+  background: var(--bg3);
+  border: 0.5px solid var(--border2);
+  border-radius: var(--radius-sm);
+  padding: 7px 12px;
+  font-size: 11px;
+  color: var(--text);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.flow-box.start { border-color: rgba(79,142,247,0.4); color: var(--accent2); }
+.flow-box.ai    { border-color: rgba(167,139,250,0.4); color: var(--purple); }
+.flow-box.end   { border-color: rgba(61,214,140,0.4); color: var(--green); }
+.flow-arrow { font-size: 12px; color: var(--text3); padding: 0 6px; flex-shrink: 0; }
+.flow-branch { display: flex; flex-direction: column; gap: 6px; }
+.flow-sub { font-size: 10px; color: var(--text3); padding: 0 8px; }
+
+/* ── TECH TABLE ── */
+.tech-table { width: 100%; border-collapse: collapse; }
+.tech-table th {
+  font-size: 10px; font-weight: 500; color: var(--text3);
+  text-transform: uppercase; letter-spacing: 0.07em;
+  padding: 8px 12px; text-align: left;
+  border-bottom: 0.5px solid var(--border2);
+}
+.tech-table td {
+  padding: 9px 12px;
+  font-size: 12px; color: var(--text2);
+  border-bottom: 0.5px solid var(--border);
+  vertical-align: top;
+}
+.tech-table tr:last-child td { border-bottom: none; }
+.tech-table .td-layer { font-size: 10px; color: var(--text3); }
+.tech-table .td-tech { font-family: var(--mono); color: var(--accent2); font-size: 11px; }
+.tech-table .td-reason { color: var(--text2); }
+.tech-wrap {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* ── ARCH ── */
+.arch-3tier {
+  display: grid;
+  grid-template-columns: 1fr 36px 1fr 36px 1fr;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 16px;
+}
+.arch-box {
+  border-radius: var(--radius);
+  padding: 14px;
+  text-align: center;
+}
+.arch-box .arch-name { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+.arch-box .arch-port { font-family: var(--mono); font-size: 10px; color: var(--text3); }
+.arch-box .arch-desc { font-size: 10px; color: var(--text3); margin-top: 4px; }
+.arch-react  { background: rgba(97,218,251,0.08); border: 0.5px solid rgba(97,218,251,0.25); }
+.arch-spring { background: rgba(109,195,87,0.08); border: 0.5px solid rgba(109,195,87,0.25); }
+.arch-flask  { background: rgba(200,170,120,0.08); border: 0.5px solid rgba(200,170,120,0.25); }
+.arch-react  .arch-name { color: #67d6f5; }
+.arch-spring .arch-name { color: #86e06a; }
+.arch-flask  .arch-name { color: #e0c97a; }
+.arch-arrow-col { text-align: center; font-size: 16px; color: var(--text3); opacity: 0.5; }
+.arch-db-row { text-align: center; }
+.arch-db {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(200,60,40,0.08); border: 0.5px solid rgba(200,60,40,0.25);
+  border-radius: var(--radius-sm); padding: 8px 20px;
+}
+.arch-db .db-name { font-size: 12px; font-weight: 500; color: #e07060; }
+.arch-db .db-detail { font-family: var(--mono); font-size: 10px; color: var(--text3); }
+.arch-db-arrow { text-align: center; font-size: 12px; color: var(--text3); opacity: 0.4; margin: 6px 0; }
+.cors-note {
+  margin-top: 12px; padding: 9px 12px;
+  background: rgba(79,142,247,0.06); border: 0.5px solid rgba(79,142,247,0.2);
+  border-radius: var(--radius-sm);
+  font-size: 11px; color: var(--text2);
+  font-family: var(--mono);
+}
+
+/* ── DATA FLOW ── */
+.dataflow {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.df-step {
+  display: grid; grid-template-columns: 28px 1fr; gap: 12px; align-items: start;
+  margin-bottom: 10px;
+}
+.df-step:last-child { margin-bottom: 0; }
+.df-num {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--accent-dim); border: 0.5px solid rgba(79,142,247,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 10px; color: var(--accent2);
+  flex-shrink: 0; margin-top: 2px;
+}
+.df-content { font-size: 12px; color: var(--text2); line-height: 1.6; }
+.df-content .df-label { font-weight: 500; color: var(--text); margin-bottom: 2px; font-size: 12px; }
+.df-content code {
+  font-family: var(--mono); font-size: 10px;
+  background: var(--bg3); padding: 1px 5px; border-radius: 3px;
+  color: var(--accent2);
+}
+
+/* ── AUTH TABLE ── */
+.auth-table { width: 100%; border-collapse: collapse; }
+.auth-table th {
+  font-size: 10px; font-weight: 500; color: var(--text3);
+  text-transform: uppercase; letter-spacing: 0.07em;
+  padding: 8px 12px; text-align: left;
+  border-bottom: 0.5px solid var(--border2);
+}
+.auth-table td { padding: 8px 12px; font-size: 11px; color: var(--text2); border-bottom: 0.5px solid var(--border); }
+.auth-table tr:last-child td { border-bottom: none; }
+.badge-yes { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 4px; background: var(--green-dim); color: var(--green); border: 0.5px solid rgba(61,214,140,0.3); }
+.badge-no  { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 4px; background: var(--red-dim); color: var(--red); border: 0.5px solid rgba(229,83,75,0.3); }
+.badge-partial { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 4px; background: var(--amber-dim); color: var(--amber); border: 0.5px solid rgba(245,166,35,0.3); }
+
+/* ── API TABLE ── */
+.api-table { width: 100%; border-collapse: collapse; }
+.api-table th {
+  font-size: 10px; font-weight: 500; color: var(--text3);
+  text-transform: uppercase; letter-spacing: 0.07em;
+  padding: 8px 12px; text-align: left;
+  border-bottom: 0.5px solid var(--border2);
+}
+.api-table td { padding: 8px 12px; font-size: 11px; border-bottom: 0.5px solid var(--border); vertical-align: middle; }
+.api-table tr:last-child td { border-bottom: none; }
+.method {
+  font-family: var(--mono); font-size: 10px; padding: 2px 6px;
+  border-radius: 4px; font-weight: 500; display: inline-block;
+}
+.m-get  { background: rgba(61,214,140,0.12); color: var(--green); }
+.m-post { background: rgba(79,142,247,0.12); color: var(--accent2); }
+.m-put  { background: rgba(245,166,35,0.12); color: var(--amber); }
+.m-del  { background: rgba(229,83,75,0.12); color: var(--red); }
+.api-path { font-family: var(--mono); font-size: 10px; color: var(--text); }
+.api-desc { color: var(--text2); }
+
+/* ── MVC FLOW ── */
+.mvc-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+.mvc-box {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  text-align: center;
+  position: relative;
+}
+.mvc-box .mvc-name { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.mvc-box .mvc-desc { font-size: 10px; color: var(--text3); line-height: 1.5; }
+.mvc-box.c-react  { border-color: rgba(97,218,251,0.3); }
+.mvc-box.c-ctrl   { border-color: rgba(79,142,247,0.3); }
+.mvc-box.c-svc    { border-color: rgba(245,166,35,0.3); }
+.mvc-box.c-mapper { border-color: rgba(167,139,250,0.3); }
+.mvc-box.c-db     { border-color: rgba(200,60,40,0.3); }
+.mvc-box.c-react  .mvc-name { color: #67d6f5; }
+.mvc-box.c-ctrl   .mvc-name { color: var(--accent2); }
+.mvc-box.c-svc    .mvc-name { color: var(--amber); }
+.mvc-box.c-mapper .mvc-name { color: var(--purple); }
+.mvc-box.c-db     .mvc-name { color: #e07060; }
+.mvc-arrows { display: flex; align-items: center; justify-content: center; gap: 0; margin: 8px 0; }
+.mvc-arrow-item { text-align: center; flex: 1; font-size: 10px; color: var(--text3); }
+
+/* ── DTO TABLE ── */
+.dto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.dto-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.dto-head { padding: 10px 14px; font-size: 11px; font-weight: 500; border-bottom: 0.5px solid var(--border); }
+.dto-head.req { color: var(--accent2); background: var(--accent-dim); }
+.dto-head.res { color: var(--green); background: var(--green-dim); }
+.dto-body { padding: 10px 14px; }
+.dto-field { font-family: var(--mono); font-size: 10px; color: var(--text2); padding: 3px 0; display: flex; justify-content: space-between; border-bottom: 0.5px solid var(--border); }
+.dto-field:last-child { border-bottom: none; }
+.dto-field .df-name { color: var(--text); }
+.dto-field .df-type { color: var(--text3); }
+
+/* ── FEATURE SECTIONS ── */
+.feat-section {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.feat-header {
+  padding: 12px 16px;
+  border-bottom: 0.5px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.feat-title { font-size: 13px; font-weight: 500; color: var(--text); }
+.feat-badge { font-size: 10px; padding: 2px 8px; border-radius: 4px; }
+.feat-body { padding: 14px 16px; }
+.feat-desc { font-size: 12px; color: var(--text2); line-height: 1.7; margin-bottom: 12px; }
+.feat-flow { font-family: var(--mono); font-size: 10px; color: var(--text3); background: var(--bg3); border-radius: var(--radius-sm); padding: 10px 12px; line-height: 1.9; }
+.feat-flow .fl-label { color: var(--accent2); }
+.feat-flow .fl-arrow { color: var(--text3); }
+.feat-flow .fl-val   { color: var(--green); }
+
+/* ── AI MODEL ── */
+.ai-rule-table { width: 100%; border-collapse: collapse; }
+.ai-rule-table th {
+  font-size: 10px; font-weight: 500; color: var(--text3);
+  text-transform: uppercase; letter-spacing: 0.07em;
+  padding: 8px 12px; text-align: left;
+  border-bottom: 0.5px solid var(--border2);
+}
+.ai-rule-table td { padding: 8px 12px; font-size: 11px; border-bottom: 0.5px solid var(--border); color: var(--text2); }
+.ai-rule-table tr:last-child td { border-bottom: none; }
+.weight-badge { font-family: var(--mono); font-size: 10px; padding: 2px 7px; border-radius: 4px; background: var(--amber-dim); color: var(--amber); border: 0.5px solid rgba(245,166,35,0.3); }
+.weight-high { background: rgba(229,83,75,0.12); color: var(--red); border-color: rgba(229,83,75,0.3); }
+
+/* ── SHAP ── */
+.shap-wrap { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 16px; }
+.shap-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.shap-feat { font-size: 11px; color: var(--text2); width: 72px; text-align: right; flex-shrink: 0; }
+.shap-bar-wrap { flex: 1; height: 14px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+.shap-bar { height: 100%; border-radius: 3px; transition: width 1s ease; }
+.bar-pos { background: rgba(229,83,75,0.6); }
+.bar-neg { background: rgba(79,142,247,0.6); }
+.shap-val { font-family: var(--mono); font-size: 10px; width: 40px; flex-shrink: 0; }
+.shap-pos { color: #e5534b; }
+.shap-neg { color: var(--accent2); }
+.shap-legend { display: flex; gap: 16px; margin-top: 10px; font-size: 10px; color: var(--text3); }
+.shap-legend span { display: flex; align-items: center; gap: 5px; }
+.shap-legend .dot { width: 8px; height: 8px; border-radius: 2px; }
+
+/* ── TROUBLESHOOT ── */
+.trouble-item {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  display: grid; grid-template-columns: auto 1fr; gap: 12px;
+}
+.trouble-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); margin-top: 5px; flex-shrink: 0; }
+.trouble-q { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.trouble-cause { font-size: 11px; color: var(--text3); margin-bottom: 3px; }
+.trouble-sol { font-size: 11px; color: var(--green); }
+.trouble-sol::before { content: '→ '; }
+
+/* ── RETROSPECT ── */
+.retro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+.retro-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+.retro-icon { font-size: 18px; margin-bottom: 8px; }
+.retro-title { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+.retro-desc { font-size: 11px; color: var(--text2); line-height: 1.7; }
+.learned-list { display: flex; flex-direction: column; gap: 8px; }
+.learned-item {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start;
+}
+.learned-num {
+  font-family: var(--mono); font-size: 10px;
+  color: var(--accent2);
+  width: 18px; height: 18px;
+  background: var(--accent-dim);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  border: 0.5px solid rgba(79,142,247,0.3);
+  flex-shrink: 0; margin-top: 2px;
+}
+.learned-title { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+.learned-desc  { font-size: 11px; color: var(--text2); line-height: 1.6; }
+
+/* ── CLOSING ── */
+.closing {
+  text-align: center; padding: 40px 20px;
+  border-top: 0.5px solid var(--border); margin-top: 32px;
+}
+.closing h2 { font-size: 22px; font-weight: 300; color: var(--text); margin-bottom: 8px; letter-spacing: -0.5px; }
+.closing h2 span { color: var(--accent2); font-weight: 500; }
+.closing p { font-size: 12px; color: var(--text2); margin-bottom: 20px; line-height: 1.8; }
+.team-chips { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
+.team-chip { font-size: 11px; padding: 4px 12px; border-radius: 99px; background: var(--surface); border: 0.5px solid var(--border2); color: var(--text2); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-brand">손세진 <span>·</span></a>
+  <div class="nav-sep"></div>
+  <ul>
+    <li><a href="index.html" class="active">포트폴리오</a></li>
+    <li><a href="screens.html">구현 화면</a></li>
+    <li><a href="resume.html">이력서</a></li>
+    <li><a href="cover-letter.html">자기소개서</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+
+  <!-- ① 표지 HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-tag">팀 프로젝트 · 2026.01.30 – 2026.03.25</div>
+    <h1><strong>FIN FLOW</strong> <span class="hl">GUARD</span></h1>
+    <div class="hero-sub">금융 거래 이상 감지 AI 웹 서비스 &nbsp;·&nbsp; 3인 팀 &nbsp;·&nbsp; 프론트엔드 리드 &amp; PM</div>
+    <div class="badges">
+      <span class="badge b-react">React 18</span>
+      <span class="badge b-spring">Spring Boot 3</span>
+      <span class="badge b-flask">Python Flask</span>
+      <span class="badge b-xgb">XGBoost</span>
+      <span class="badge b-shap">SHAP</span>
+      <span class="badge b-oracle">Oracle XE</span>
+      <span class="badge b-mybatis">MyBatis</span>
+    </div>
+  </div>
+
+  <div class="inner">
+
+    <!-- ② 프로젝트 개요 -->
+    <div class="sec-label first" style="margin-top:28px">프로젝트 개요</div>
+    <div class="overview-grid">
+      <div class="ov-card"><div class="ov-label">목적</div><div class="ov-val">금융 담당자가 이상 거래를 실시간 탐지·모니터링할 수 있는 내부 포털</div></div>
+      <div class="ov-card"><div class="ov-label">기간 / 인원</div><div class="ov-val">2026.01.30 – 2026.03.25 &nbsp;(약 8주) &nbsp;·&nbsp; 3인 팀</div></div>
+      <div class="ov-card"><div class="ov-label">본인 역할 / 담당</div><div class="ov-val">프론트엔드 리드 &amp; PM &nbsp;·&nbsp; UI/UX 설계, 라우팅 가드, 대시보드 UI, 일정·출퇴근</div></div>
+    </div>
+
+    <!-- ③ 문제 정의 & 해결 -->
+    <div class="sec-label">문제 정의 &amp; 해결 방향</div>
+    <div class="ps-grid">
+      <div class="ps-card prob">
+        <div class="ps-head">문제점</div>
+        <div class="ps-item">기존 규칙 기반 탐지는 신규 패턴을 잡지 못함</div>
+        <div class="ps-item">은행 담당자가 이상 거래를 즉시 확인할 수 있는 도구 없음</div>
+        <div class="ps-item">부서별 업무 시스템이 분산되어 통합 관리 불가</div>
+      </div>
+      <div class="ps-card sol">
+        <div class="ps-head">해결</div>
+        <div class="ps-item">XGBoost AI로 실시간 사기 확률 계산</div>
+        <div class="ps-item">SHAP으로 "왜 이상 거래인지" 근거 시각화</div>
+        <div class="ps-item">대시보드·게시판·채팅·일정·출퇴근 단일 시스템 통합</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ④ 사용자 정의 (Persona) -->
+    <div class="sec-label">사용자 정의 (Persona)</div>
+    <div class="persona-grid">
+      <div class="persona-card">
+        <div class="persona-head admin">관리자 (Admin)</div>
+        <div class="persona-body">
+          <div class="persona-row"><strong>역할</strong> 전체 시스템 관리, 모든 은행 모니터링</div>
+          <div class="persona-row"><strong>접근 범위</strong> 전 은행 대시보드, 회원 등록, 거래 입력</div>
+          <div class="persona-row"><strong>Pain Point</strong> 은행별 현황 한눈에 파악 불가</div>
+          <div class="persona-row"><strong>주요 화면</strong> /admin, /bank/:bankCode, /board, /scheduler</div>
+        </div>
+      </div>
+      <div class="persona-card">
+        <div class="persona-head bank">은행 사용자 (Bank)</div>
+        <div class="persona-body">
+          <div class="persona-row"><strong>역할</strong> 자행 이상 거래 모니터링</div>
+          <div class="persona-row"><strong>접근 범위</strong> 자행 대시보드, 고객 상세만</div>
+          <div class="persona-row"><strong>Pain Point</strong> 이상 거래 발생 시 즉각 확인 필요</div>
+          <div class="persona-row"><strong>주요 화면</strong> /bank/:bankCode, /board, 채팅</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑤ 메뉴 구조도 -->
+    <div class="sec-label">메뉴 구조도</div>
+    <div class="tree-wrap">
+      <div class="t-root">FFG 서비스</div>
+      <div style="padding-left:16px">
+        <div>├── 로그인 <span class="t-sub">(/)</span></div>
+        <div style="margin-top:6px">├── <span class="t-admin">[Admin]</span></div>
+        <div style="padding-left:20px">
+          <div>├── 관리자 대시보드 <span class="t-sub">(/admin)</span></div>
+          <div style="padding-left:20px">└── 거래 입력 <span class="t-sub">(/admin/tx-input)</span></div>
+          <div>├── 은행 대시보드 <span class="t-sub">(/bank/:bankCode)</span></div>
+          <div style="padding-left:20px">└── 고객 상세 <span class="t-sub">(/bank/:bankCode/customer/:userId/tx/:txId)</span></div>
+          <div>├── 게시판 <span class="t-sub">(/board/error | notice | community | faq)</span></div>
+          <div>├── 스케줄러 <span class="t-sub">(/scheduler)</span></div>
+          <div>└── 채팅 <span class="t-sub">(모달 — 전 페이지 공통)</span></div>
+        </div>
+        <div style="margin-top:6px">└── <span class="t-bank">[Bank]</span></div>
+        <div style="padding-left:20px">
+          <div>├── 은행 대시보드 <span class="t-sub">(/bank/:bankCode) ← 자행만</span></div>
+          <div>├── 게시판</div>
+          <div>└── 채팅</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑥ 사용자 흐름 -->
+    <div class="sec-label">사용자 흐름 (User Flow)</div>
+    <div class="flow-wrap">
+      <div style="margin-bottom:12px">
+        <div class="flow-row" style="gap:6px; flex-wrap:wrap; align-items:flex-start">
+          <div class="flow-box start">로그인</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-branch">
+            <div class="flow-row" style="gap:6px">
+              <div class="flow-box" style="border-color:rgba(245,166,35,0.4); color:var(--amber)">role == admin</div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-box">관리자 대시보드</div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-box">은행 선택</div>
+            </div>
+            <div class="flow-row" style="gap:6px; margin-top:6px">
+              <div class="flow-box" style="border-color:rgba(61,214,140,0.4); color:var(--green)">role == bank</div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-box">은행 대시보드 (자행만)</div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-row" style="gap:6px; margin-top:10px">
+          <div class="flow-sub">↓ 공통</div>
+          <div class="flow-box">이상 거래 목록</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">고객 클릭</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">고객 상세 페이지</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box ai">AI 예측 + SHAP 시각화</div>
+        </div>
+        <div style="margin-top:10px; font-size:11px; color:var(--text3)">
+          사이드바 공통 접근: 게시판 / 스케줄러 / 채팅 (어느 페이지에서든 접근 가능)
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ⑦⑧ 기술 스택 & 선정 이유 -->
+    <div class="sec-label">기술 스택 &amp; 선정 이유</div>
+    <div class="tech-wrap">
+      <table class="tech-table">
+        <tr><th>레이어</th><th>기술</th><th>버전</th><th>선택 이유</th></tr>
+        <tr><td class="td-layer">Frontend</td><td class="td-tech">React</td><td style="font-size:11px;color:var(--text3)">18</td><td class="td-reason">SPA로 페이지 전환 없이 대시보드 실시간 갱신, 컴포넌트 재사용</td></tr>
+        <tr><td class="td-layer">Frontend</td><td class="td-tech">Vite</td><td style="font-size:11px;color:var(--text3)">—</td><td class="td-reason">빠른 HMR 빌드 도구</td></tr>
+        <tr><td class="td-layer">Frontend</td><td class="td-tech">React Router DOM</td><td style="font-size:11px;color:var(--text3)">—</td><td class="td-reason">중첩 라우팅 및 Route Guard 구현</td></tr>
+        <tr><td class="td-layer">Frontend</td><td class="td-tech">FullCalendar</td><td style="font-size:11px;color:var(--text3)">—</td><td class="td-reason">일정 UI 컴포넌트</td></tr>
+        <tr><td class="td-layer">Backend</td><td class="td-tech">Spring Boot</td><td style="font-size:11px;color:var(--text3)">3.4.3</td><td class="td-reason">REST API 빠른 구축, MyBatis 조합으로 SQL 직접 제어</td></tr>
+        <tr><td class="td-layer">Backend</td><td class="td-tech">Java</td><td style="font-size:11px;color:var(--text3)">17</td><td class="td-reason">—</td></tr>
+        <tr><td class="td-layer">Backend</td><td class="td-tech">MyBatis (JPA ✗)</td><td style="font-size:11px;color:var(--text3)">4.0.1</td><td class="td-reason">Oracle 계층형 쿼리(CONNECT BY), ROWNUM 페이징 등 복잡한 SQL 필요</td></tr>
+        <tr><td class="td-layer">DB</td><td class="td-tech">Oracle XE</td><td style="font-size:11px;color:var(--text3)">포트 1522</td><td class="td-reason">계층형 쿼리, 시퀀스 등 엔터프라이즈 금융 환경에 적합</td></tr>
+        <tr><td class="td-layer">DB</td><td class="td-tech">HikariCP</td><td style="font-size:11px;color:var(--text3)">max 10</td><td class="td-reason">커넥션 풀 관리</td></tr>
+        <tr><td class="td-layer">AI</td><td class="td-tech">Python Flask</td><td style="font-size:11px;color:var(--text3)">—</td><td class="td-reason">AI 모델 서빙에 경량 프레임워크 적합, Spring과 REST로 분리 연동</td></tr>
+        <tr><td class="td-layer">AI</td><td class="td-tech">XGBoost</td><td style="font-size:11px;color:var(--text3)">—</td><td class="td-reason">불균형 데이터에 scale_pos_weight 지원, 빠른 학습</td></tr>
+        <tr><td class="td-layer">AI</td><td class="td-tech">SHAP</td><td style="font-size:11px;color:var(--text3)">—</td><td class="td-reason">예측 근거 시각화</td></tr>
+        <tr><td class="td-layer">AI</td><td class="td-tech">scikit-learn</td><td style="font-size:11px;color:var(--text3)">—</td><td class="td-reason">LabelEncoder 전처리</td></tr>
+      </table>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ⑨ 시스템 아키텍처 -->
+    <div class="sec-label">시스템 아키텍처</div>
+    <div class="tech-wrap" style="padding:20px">
+      <div class="arch-3tier">
+        <div class="arch-box arch-react">
+          <div class="arch-name">React 18</div>
+          <div class="arch-port">포트 5173</div>
+          <div class="arch-desc">Vite SPA</div>
+        </div>
+        <div class="arch-arrow-col">⇄</div>
+        <div class="arch-box arch-spring">
+          <div class="arch-name">Spring Boot 3</div>
+          <div class="arch-port">포트 8080</div>
+          <div class="arch-desc">REST API 서버</div>
+        </div>
+        <div class="arch-arrow-col">⇄</div>
+        <div class="arch-box arch-flask">
+          <div class="arch-name">Python Flask</div>
+          <div class="arch-port">포트 5000</div>
+          <div class="arch-desc">AI 예측 서버</div>
+        </div>
+      </div>
+      <div class="arch-db-arrow">↕</div>
+      <div class="arch-db-row">
+        <div class="arch-db">
+          <div><div class="db-name">Oracle XE</div><div class="db-detail">포트 1522 · MyBatis XML · HikariCP (max 10)</div></div>
+        </div>
+      </div>
+      <div class="cors-note" style="margin-top:14px">
+        CORS: WebConfig allowedOrigins localhost:5173, 5174 · /api/** 패턴 전체 허용
+      </div>
+    </div>
+
+    <!-- ⑩ 데이터 흐름 -->
+    <div class="sec-label">데이터 흐름 구조</div>
+    <div class="dataflow">
+      <div class="df-step"><div class="df-num">①</div><div class="df-content"><div class="df-label">React — 거래 입력</div>12개 필드 입력 폼 → <code>POST /api/tx</code> 전송</div></div>
+      <div class="df-step"><div class="df-num">②</div><div class="df-content"><div class="df-label">Spring Boot — 저장</div><code>TxDataRequest</code> 수신, Oracle에 저장 (fraudScore = 0 초기화)</div></div>
+      <div class="df-step"><div class="df-num">③</div><div class="df-content"><div class="df-label">Python Flask — 전처리</div><code>POST /predict</code> → <code>preprocess()</code> → LabelEncoder 변환, 미등록 값 0 처리, txDatetime → tx_hour / tx_weekday 추출</div></div>
+      <div class="df-step"><div class="df-num">④</div><div class="df-content"><div class="df-label">XGBoost — 예측</div><code>predict_proba()</code> → 클래스 1(사기) 확률 0~1 반환</div></div>
+      <div class="df-step"><div class="df-num">⑤</div><div class="df-content"><div class="df-label">SHAP — 시각화</div><code>TreeExplainer</code> → 피처별 기여도 → 상위 8개 → barh 차트 → base64 PNG 생성</div></div>
+      <div class="df-step"><div class="df-num">⑥</div><div class="df-content"><div class="df-label">React — 렌더링</div><code>{ isFraud, fraudProbability, shapImage, shapDetail }</code> 화면 표시</div></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ⑪ 권한 구조 -->
+    <div class="sec-label">사용자 권한 구조</div>
+    <div class="tech-wrap">
+      <table class="auth-table">
+        <tr><th>기능</th><th>Admin</th><th>Bank</th></tr>
+        <tr><td>로그인 후 이동</td><td><span style="font-family:var(--mono);font-size:10px;color:var(--text2)">/admin</span></td><td><span style="font-family:var(--mono);font-size:10px;color:var(--text2)">/bank/:bankCode</span></td></tr>
+        <tr><td>관리자 대시보드</td><td><span class="badge-yes">✓</span></td><td><span class="badge-no">✗</span></td></tr>
+        <tr><td>거래 데이터 입력</td><td><span class="badge-yes">✓</span></td><td><span class="badge-no">✗</span></td></tr>
+        <tr><td>은행 대시보드</td><td><span class="badge-yes">전 은행</span></td><td><span class="badge-partial">자행만</span></td></tr>
+        <tr><td>고객 상세</td><td><span class="badge-yes">✓</span></td><td><span class="badge-partial">자행만</span></td></tr>
+        <tr><td>게시판</td><td><span class="badge-yes">✓</span></td><td><span class="badge-yes">✓</span></td></tr>
+        <tr><td>스케줄러</td><td><span class="badge-yes">✓</span></td><td><span class="badge-no">✗</span></td></tr>
+        <tr><td>채팅</td><td><span class="badge-yes">전체 유저</span></td><td><span class="badge-partial">자행만</span></td></tr>
+        <tr><td>회원 등록</td><td><span class="badge-yes">✓</span></td><td><span class="badge-no">✗</span></td></tr>
+      </table>
+    </div>
+    <div style="margin-top:8px; background:var(--surface); border:0.5px solid var(--border); border-radius:var(--radius); padding:12px 16px; font-size:11px; color:var(--text2);">
+      <strong style="color:var(--text); font-size:11px;">Route Guard 3종</strong> &nbsp;·&nbsp;
+      <span style="font-family:var(--mono); font-size:10px; color:var(--accent2);">ProtectedRoute</span> — localStorage role 검사 &nbsp;·&nbsp;
+      <span style="font-family:var(--mono); font-size:10px; color:var(--green);">BankRoute</span> — URL :bankCode vs localStorage bankCode 비교 &nbsp;·&nbsp;
+      <span style="font-family:var(--mono); font-size:10px; color:var(--purple);">CustomerRoute</span> — 은행 + 고객 복합 조건 검증
+    </div>
+
+    <!-- ⑫ API 구조 -->
+    <div class="sec-label">API 구조</div>
+    <div class="tech-wrap">
+      <table class="api-table">
+        <tr><th>Method</th><th>URL</th><th>설명</th></tr>
+        <tr><td><span class="method m-post">POST</span></td><td class="api-path">/api/login</td><td class="api-desc">로그인</td></tr>
+        <tr><td><span class="method m-get">GET</span></td><td class="api-path">/api/dashboard/{bankCode}</td><td class="api-desc">이상거래 목록</td></tr>
+        <tr><td><span class="method m-post">POST</span></td><td class="api-path">/api/tx</td><td class="api-desc">거래 저장</td></tr>
+        <tr><td><span class="method m-get">GET</span></td><td class="api-path">/api/tx/recent</td><td class="api-desc">최근 거래 10건</td></tr>
+        <tr><td><span class="method m-get">GET</span></td><td class="api-path">/api/bank/{bankCode}/customer/{userId}/tx/{txId}</td><td class="api-desc">고객 상세</td></tr>
+        <tr><td><span class="method m-get">GET</span> <span class="method m-post" style="margin-left:3px">POST</span> <span class="method m-put" style="margin-left:3px">PUT</span> <span class="method m-del" style="margin-left:3px">DEL</span></td><td class="api-path">/api/boards</td><td class="api-desc">게시판 CRUD</td></tr>
+        <tr><td><span class="method m-post">POST</span></td><td class="api-path">/api/chat/send</td><td class="api-desc">채팅 전송</td></tr>
+        <tr><td><span class="method m-post">POST</span></td><td class="api-path">/api/chat/read</td><td class="api-desc">읽음 처리</td></tr>
+        <tr><td><span class="method m-get">GET</span></td><td class="api-path">/api/attendance/status</td><td class="api-desc">출퇴근 상태 조회</td></tr>
+        <tr><td><span class="method m-post">POST</span></td><td class="api-path">/api/attendance/checkin</td><td class="api-desc">출근 처리</td></tr>
+        <tr><td><span class="method m-get">GET</span> <span class="method m-post" style="margin-left:3px">POST</span></td><td class="api-path">/api/schedules</td><td class="api-desc">일정 조회/등록</td></tr>
+        <tr><td><span class="method m-post">POST</span></td><td class="api-path">/predict &nbsp;<span style="color:var(--text3);font-size:10px">(Flask)</span></td><td class="api-desc">AI 예측</td></tr>
+      </table>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ⑬ MVC 흐름 -->
+    <div class="sec-label">MVC 흐름 구조</div>
+    <div class="mvc-row">
+      <div class="mvc-box c-react"><div class="mvc-name">React</div><div class="mvc-desc">fetch 요청<br>화면 렌더링</div></div>
+      <div class="mvc-box c-ctrl"><div class="mvc-name">Controller</div><div class="mvc-desc">HTTP 수신<br>null 검증<br>DTO 바인딩</div></div>
+      <div class="mvc-box c-svc"><div class="mvc-name">Service</div><div class="mvc-desc">비즈니스 로직<br>유효성 검증<br>Mapper 조합</div></div>
+      <div class="mvc-box c-mapper"><div class="mvc-name">Mapper</div><div class="mvc-desc">@Param 바인딩<br>XML namespace</div></div>
+      <div class="mvc-box c-db"><div class="mvc-name">Oracle DB</div><div class="mvc-desc">동적 SQL<br>resultMap</div></div>
+    </div>
+
+    <!-- ⑭ DTO 설계 -->
+    <div class="sec-label">DTO 설계 — 요청 / 응답 분리</div>
+    <div class="dto-grid">
+      <div class="dto-card">
+        <div class="dto-head req">TxDataRequest (12개 필드)</div>
+        <div class="dto-body">
+          <div class="dto-field"><span class="df-name">userId</span><span class="df-type">String</span></div>
+          <div class="dto-field"><span class="df-name">bankCode</span><span class="df-type">String</span></div>
+          <div class="dto-field"><span class="df-name">txChannel</span><span class="df-type">WEB / MOBILE / ATM</span></div>
+          <div class="dto-field"><span class="df-name">txType</span><span class="df-type">TRANSFER / WITHDRAW …</span></div>
+          <div class="dto-field"><span class="df-name">txAmount</span><span class="df-type">BigDecimal</span></div>
+          <div class="dto-field"><span class="df-name">txDatetime</span><span class="df-type">String</span></div>
+          <div class="dto-field"><span class="df-name">txCountry</span><span class="df-type">String</span></div>
+          <div class="dto-field"><span class="df-name">txLocation</span><span class="df-type">String</span></div>
+          <div class="dto-field"><span class="df-name">deviceType</span><span class="df-type">MOBILE / PC / ATM</span></div>
+          <div class="dto-field"><span class="df-name">deviceOs</span><span class="df-type">Android / iOS …</span></div>
+          <div class="dto-field"><span class="df-name">deviceId</span><span class="df-type">String</span></div>
+          <div class="dto-field"><span class="df-name">ipAddress</span><span class="df-type">String</span></div>
+        </div>
+      </div>
+      <div class="dto-card">
+        <div class="dto-head res">설계 원칙</div>
+        <div class="dto-body" style="padding:14px">
+          <div style="margin-bottom:12px">
+            <div style="font-size:11px;font-weight:500;color:var(--text);margin-bottom:5px">Request / Response 분리</div>
+            <div style="font-size:11px;color:var(--text2);">입출력 필드가 달라 BoardCreateRequestDto / BoardDto 분리</div>
+          </div>
+          <div style="margin-bottom:12px">
+            <div style="font-size:11px;font-weight:500;color:var(--text);margin-bottom:5px">중첩 DTO</div>
+            <div style="font-size:11px;color:var(--text2);">CustomerDetailResponseDto 안에 CustomerDetailCustomerDto + List&lt;Tx&gt;</div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:500;color:var(--text);margin-bottom:5px">순수 POJO</div>
+            <div style="font-size:11px;color:var(--text2);">Lombok 미사용, 직접 getter/setter — 의존성 없는 명시적 코드</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ⑮ 주요 기능 구현 -->
+    <div class="sec-label">주요 기능 구현</div>
+
+    <!-- 로그인 -->
+    <div class="feat-section">
+      <div class="feat-header">
+        <div class="feat-title">로그인</div>
+        <span class="feat-badge" style="background:var(--accent-dim);color:var(--accent2);border:0.5px solid rgba(79,142,247,0.3)">인증</span>
+      </div>
+      <div class="feat-body">
+        <div class="feat-desc">은행코드 + 아이디 + 비밀번호 입력, role에 따라 페이지 자동 분기. JWT 미사용, localStorage 기반 인증.</div>
+        <div class="feat-flow">
+          <span class="fl-label">POST /api/login</span> <span class="fl-arrow">→</span> { memberId, pwd, bankCode }<br>
+          <span class="fl-arrow">↓</span><br>
+          role == "admin" <span class="fl-arrow">→</span> <span class="fl-val">/admin</span><br>
+          role == "bank"  <span class="fl-arrow">→</span> <span class="fl-val">/bank/:bankCode</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 관리자 대시보드 -->
+    <div class="feat-section">
+      <div class="feat-header">
+        <div class="feat-title">관리자 대시보드</div>
+        <span class="feat-badge" style="background:var(--red-dim);color:var(--red);border:0.5px solid rgba(229,83,75,0.3)">Admin 전용</span>
+      </div>
+      <div class="feat-body">
+        <div class="feat-desc">전 은행 이상 거래 통합 모니터링. 은행 드롭다운으로 전환. 시간대별·월별 시각화 차트 포함. 30초 폴링 자동 갱신.</div>
+        <div class="feat-flow">
+          <span class="fl-label">GET /api/dashboard/{bankCode}</span><br>
+          <span class="fl-arrow">↓</span> POLL_INTERVAL_MS = 30,000<br>
+          고위험 / 중위험 / 저위험 시나리오별 데이터 분류 표시<br>
+          CASE WHEN SQL <span class="fl-arrow">→</span> <span class="fl-val">patternText 자동 생성</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 은행 대시보드 -->
+    <div class="feat-section">
+      <div class="feat-header">
+        <div class="feat-title">은행 대시보드</div>
+        <span class="feat-badge" style="background:var(--green-dim);color:var(--green);border:0.5px solid rgba(61,214,140,0.3)">Bank</span>
+      </div>
+      <div class="feat-body">
+        <div class="feat-desc">자행 이상 거래 목록 표시. BankRoute 가드로 타행 접근 차단. fraudScore + 패턴 텍스트 확인.</div>
+        <div class="feat-flow">
+          <span class="fl-label">GET /api/dashboard/{bankCode}</span><br>
+          <span class="fl-arrow">↓</span> BankRoute: URL :bankCode vs localStorage bankCode 비교<br>
+          { txId, userId, name, <span class="fl-val">patternText</span>, <span class="fl-val">fraudScore</span> }
+        </div>
+      </div>
+    </div>
+
+    <!-- 거래 데이터 입력 -->
+    <div class="feat-section">
+      <div class="feat-header">
+        <div class="feat-title">거래 데이터 입력</div>
+        <span class="feat-badge" style="background:var(--accent-dim);color:var(--accent2);border:0.5px solid rgba(79,142,247,0.3)">Admin 전용</span>
+      </div>
+      <div class="feat-body">
+        <div class="feat-desc">12개 필드 입력 폼. Controller에서 필드별 null 검증 후 Oracle에 저장. fraudScore는 0으로 초기화.</div>
+        <div class="feat-flow">
+          <span class="fl-label">POST /api/tx</span> — TxDataRequest (12개 필드)<br>
+          <span class="fl-arrow">↓</span> Controller: 필드별 null 검증<br>
+          Oracle INSERT — <span class="fl-val">FFG_TX_DATA_SEQ.NEXTVAL</span> → TX_ID 자동 채번<br>
+          fraudScore = 0 초기 저장
+        </div>
+      </div>
+    </div>
+
+    <!-- 고객 상세 -->
+    <div class="feat-section">
+      <div class="feat-header">
+        <div class="feat-title">고객 상세 페이지</div>
+        <span class="feat-badge" style="background:var(--purple-dim);color:var(--purple);border:0.5px solid rgba(167,139,250,0.3)">AI 연동</span>
+      </div>
+      <div class="feat-body">
+        <div class="feat-desc">고객 정보 + 현재 거래 + AI 예측 결과(사기 확률 + SHAP 시각화)를 한 화면에 표시.</div>
+        <div class="feat-flow">
+          <span class="fl-label">GET /api/bank/{bankCode}/customer/{userId}/tx/{txId}</span><br>
+          <span class="fl-arrow">↓</span> 고객정보 + 거래내역 + 요약 조회<br>
+          <span class="fl-label">POST /predict</span> → Flask<br>
+          <span class="fl-arrow">→</span> <span class="fl-val">fraudProbability</span> + <span class="fl-val">shapImage (base64)</span> 반환<br>
+          SHAP 바 차트 화면 렌더링
+        </div>
+      </div>
+    </div>
+
+    <!-- 게시판 -->
+    <div class="feat-section">
+      <div class="feat-header">
+        <div class="feat-title">게시판 (4종)</div>
+        <span class="feat-badge" style="background:var(--amber-dim);color:var(--amber);border:0.5px solid rgba(245,166,35,0.3)">공통</span>
+      </div>
+      <div class="feat-body">
+        <div class="feat-desc">분析의뢰·공지·커뮤니티·FAQ 4종. 계층형 답글 + 파일 첨부 지원. boardConfig.js로 4종 통합 관리.</div>
+        <div class="feat-flow">
+          <span class="fl-label">GET /api/boards</span> ?boardType=&amp;page=&amp;keyword=<br>
+          <span class="fl-label">POST</span> /api/boards (multipart) &nbsp;·&nbsp; <span class="fl-label">PUT/DELETE</span> /api/boards/{boardNo}<br>
+          CONNECT BY PRIOR <span class="fl-arrow">→</span> <span class="fl-val">답글 트리 구조</span><br>
+          ROWNUM startRow/endRow <span class="fl-arrow">→</span> <span class="fl-val">10건씩 페이징</span><br>
+          UUID <span class="fl-arrow">→</span> 파일명 저장
+        </div>
+      </div>
+    </div>
+
+    <!-- 캘린더 / 출퇴근 / 채팅 -->
+    <div class="feat-section">
+      <div class="feat-header">
+        <div class="feat-title">캘린더 / 출퇴근 / 채팅</div>
+        <span class="feat-badge" style="background:var(--teal-dim);color:var(--teal);border:0.5px solid rgba(45,212,191,0.3)">공통</span>
+      </div>
+      <div class="feat-body">
+        <div class="feat-desc">FullCalendar 일정 CRUD + 오늘 날짜 카운트 기반 출퇴근 중복 방지 + role별 채팅 대상 필터링 + 읽음 처리.</div>
+        <div class="feat-flow">
+          [일정] <span class="fl-label">GET /api/schedules</span>?userId= &nbsp;·&nbsp; <span class="fl-label">POST /api/schedules</span><br>
+          [출퇴근] <span class="fl-label">GET /api/attendance/status</span> &nbsp;·&nbsp; <span class="fl-label">POST /api/attendance/checkin</span><br>
+          <span class="fl-arrow">→</span> 오늘 날짜 카운트로 중복 차단<br>
+          [채팅] <span class="fl-label">POST /api/chat/send</span> &nbsp;·&nbsp; <span class="fl-label">POST /api/chat/read</span> → 읽음 처리
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ⑯ AI 모델 -->
+    <div class="sec-label">AI 모델 파이프라인</div>
+    <div class="tech-wrap" style="margin-bottom:8px">
+      <table class="api-table">
+        <tr><th>단계</th><th>파일</th><th>내용</th></tr>
+        <tr><td><span class="method m-get">①</span></td><td class="api-path">generate_data.py</td><td class="api-desc">10,000건 합성 거래, 7가지 규칙으로 fraud_score 계산</td></tr>
+        <tr><td><span class="method m-post">②</span></td><td class="api-path">train.py</td><td class="api-desc">XGBoost 200 estimators, scale_pos_weight, 8:2 분할</td></tr>
+        <tr><td><span class="method m-put">③</span></td><td class="api-path">model/</td><td class="api-desc">model.pkl / encoders.pkl / feature_cols.pkl 저장</td></tr>
+        <tr><td><span class="method m-del">④</span></td><td class="api-path">app.py</td><td class="api-desc">Flask POST /predict, preprocess() → predict_proba()</td></tr>
+      </table>
+    </div>
+
+    <!-- 이상 탐지 규칙 -->
+    <div class="sec-label">이상 탐지 규칙</div>
+    <div class="tech-wrap">
+      <table class="ai-rule-table">
+        <tr><th>조건</th><th>가중치</th></tr>
+        <tr><td>비주요국 + 10만원 이상</td><td><span class="weight-badge">+0.45</span></td></tr>
+        <tr><td>RU / NG 거래</td><td><span class="weight-badge">+0.40</span></td></tr>
+        <tr><td>심야(00~06시) + 이체</td><td><span class="weight-badge">+0.35</span></td></tr>
+        <tr><td>ATM + 50만원 이상 출금</td><td><span class="weight-badge">+0.35</span></td></tr>
+        <tr><td>txAmount ≥ 500만원</td><td><span class="weight-badge">+0.25</span></td></tr>
+        <tr><td style="font-weight:500;color:var(--text)">fraud_score ≥ 0.4</td><td><span class="weight-badge weight-high">→ label = 1</span></td></tr>
+      </table>
+    </div>
+
+    <!-- SHAP -->
+    <div class="sec-label">SHAP 시각화</div>
+    <div class="shap-wrap">
+      <div style="font-size:11px;color:var(--text2);margin-bottom:14px;line-height:1.7;">
+        모델이 "왜 이 거래를 사기로 판단했는지" 피처별 기여도를 수치로 설명. <br>
+        <span style="font-family:var(--mono);font-size:10px;color:var(--accent2);">TreeExplainer(model).shap_values(X)</span> → 양수: 사기 기여(빨강) / 음수: 정상 기여(파랑) → <span style="font-family:var(--mono);font-size:10px;color:var(--accent2);">round(float(val), 4)</span>로 NumPy float32 직렬화 처리
+      </div>
+      <div class="shap-row"><div class="shap-feat">거래금액</div><div class="shap-bar-wrap"><div class="shap-bar bar-pos" style="width:88%"></div></div><div class="shap-val shap-pos">+0.34</div></div>
+      <div class="shap-row"><div class="shap-feat">거래국가</div><div class="shap-bar-wrap"><div class="shap-bar bar-pos" style="width:65%"></div></div><div class="shap-val shap-pos">+0.22</div></div>
+      <div class="shap-row"><div class="shap-feat">거래시간</div><div class="shap-bar-wrap"><div class="shap-bar bar-pos" style="width:50%"></div></div><div class="shap-val shap-pos">+0.17</div></div>
+      <div class="shap-row"><div class="shap-feat">디바이스OS</div><div class="shap-bar-wrap"><div class="shap-bar bar-neg" style="width:25%"></div></div><div class="shap-val shap-neg">−0.08</div></div>
+      <div class="shap-row"><div class="shap-feat">거래채널</div><div class="shap-bar-wrap"><div class="shap-bar bar-neg" style="width:18%"></div></div><div class="shap-val shap-neg">−0.05</div></div>
+      <div class="shap-legend">
+        <span><div class="dot" style="background:rgba(229,83,75,0.6)"></div> 사기에 기여</span>
+        <span><div class="dot" style="background:rgba(79,142,247,0.6)"></div> 정상에 기여</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ⑰ 트러블슈팅 -->
+    <div class="sec-label">트러블슈팅</div>
+    <div class="trouble-item">
+      <div class="trouble-dot"></div>
+      <div>
+        <div class="trouble-q">CORS 오류 — localhost:5173 → :8080 교차 출처 차단</div>
+        <div class="trouble-cause">원인: React 개발 서버(5173)에서 Spring(8080)으로의 cross-origin 요청 차단</div>
+        <div class="trouble-sol">WebConfig.addCorsMappings() allowedOrigins 명시, /api/** 패턴 등록</div>
+      </div>
+    </div>
+    <div class="trouble-item">
+      <div class="trouble-dot"></div>
+      <div>
+        <div class="trouble-q">파일 서빙 안됨 — C:/FFG/upload 로컬 경로 브라우저 접근 불가</div>
+        <div class="trouble-cause">원인: 로컬 파일 시스템 경로를 브라우저가 직접 접근 불가</div>
+        <div class="trouble-sol">WebMvcConfigurer /uploads/** → file:///C:/FFG/upload/ 정적 매핑</div>
+      </div>
+    </div>
+    <div class="trouble-item">
+      <div class="trouble-dot"></div>
+      <div>
+        <div class="trouble-q">SHAP JSON 직렬화 오류 — NumPy float32</div>
+        <div class="trouble-cause">원인: NumPy float32 타입은 Python 기본 json.dumps 직렬화 불가</div>
+        <div class="trouble-sol">round(float(val), 4)로 Python 기본 float 변환 후 jsonify() 반환</div>
+      </div>
+    </div>
+    <div class="trouble-item">
+      <div class="trouble-dot"></div>
+      <div>
+        <div class="trouble-q">Oracle ROWNUM 페이징 정렬 오류</div>
+        <div class="trouble-cause">원인: ORDER BY 전에 ROWNUM 적용 → 정렬 후 페이징이 아닌 페이징 후 정렬 발생</div>
+        <div class="trouble-sol">서브쿼리에서 ORDER BY 먼저, 외부 쿼리에서 ROWNUM 필터 적용</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ⑱ 성과 및 느낀점 -->
+    <div class="sec-label">기술적 성과</div>
+    <div class="retro-grid">
+      <div class="retro-card"><div class="retro-title">아키텍처</div><div class="retro-desc">3-tier 서버 분리 (React / Spring Boot / Flask) 설계 및 구현</div></div>
+      <div class="retro-card"><div class="retro-title">AI 파이프라인</div><div class="retro-desc">XGBoost + SHAP End-to-End 파이프라인 직접 구현</div></div>
+      <div class="retro-card"><div class="retro-title">DB</div><div class="retro-desc">Oracle 계층형 쿼리, ROWNUM 페이징 실무 적용</div></div>
+      <div class="retro-card"><div class="retro-title">설계</div><div class="retro-desc">Route Guard 기반 권한 분리, DTO Request/Response 분리 패턴</div></div>
+    </div>
+
+    <div class="sec-label">배운 점</div>
+    <div class="learned-list">
+      <div class="learned-item">
+        <div class="learned-num">1</div>
+        <div><div class="learned-title">구조 이해</div><div class="learned-desc">Controller → Service → Mapper 계층 분리를 지키면 유지보수와 역할 분리가 명확해진다는 것을 직접 경험</div></div>
+      </div>
+      <div class="learned-item">
+        <div class="learned-num">2</div>
+        <div><div class="learned-title">데이터 흐름 이해</div><div class="learned-desc">React → Spring → Flask → DB 전 구간을 추적하며 시스템 전체를 보는 시각 습득</div></div>
+      </div>
+      <div class="learned-item">
+        <div class="learned-num">3</div>
+        <div><div class="learned-title">문제 해결 경험</div><div class="learned-desc">CORS, float32 직렬화, ROWNUM 페이징 오류를 원인부터 분석해서 직접 해결</div></div>
+      </div>
+    </div>
+
+  </div><!-- /inner -->
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <h2>FIN FLOW <span>GUARD</span></h2>
+    <p>"금융 이상 거래를 AI로 탐지하고,<br>담당자가 즉시 확인할 수 있는 통합 포털을 구축했습니다"</p>
+    <div class="team-chips">
+      <span class="team-chip">손세진 · FE 리드 / PM</span>
+      <span class="team-chip">김담현 · 게시판 / 채팅</span>
+      <span class="team-chip">박희정 · 거래 입력 / AI</span>
+    </div>
+  </div>
+
+</div><!-- /page -->
+</body>
+</html>
