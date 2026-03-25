@@ -86,7 +86,7 @@ body {
 .nav ul li a.active { color: #93c5fd; border-bottom-color: #3b82f6; }
 
 /* ── LAYOUT ── */
-.page { padding: 72px 0 60px; max-width: 980px; margin: 0 auto; }
+.page { padding-top: 52px; }
 .inner { padding: 0 40px; }
 
 /* ── RESPONSIVE ── */
