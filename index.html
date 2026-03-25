@@ -443,8 +443,137 @@
 
       <div class="sec">
         <div class="sec-title">메뉴 구조도</div>
-        <div style="overflow-x:auto;background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:16px">
-          <svg width="100%" viewBox="0 0 960 520" style="min-width:760px">
+        <div style="overflow-x:auto;background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:24px 20px">
+          <div style="min-width:700px;font-size:12px;font-family:var(--mono)">
+
+            <!-- 레이아웃 공통 -->
+            <style>
+              .mn-box { display:inline-flex;align-items:center;justify-content:center;padding:6px 12px;border-radius:6px;font-size:11px;font-weight:500;white-space:nowrap;text-align:center;line-height:1.4; }
+              .mn-root { background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent); }
+              .mn-login { background:var(--bg3);border:0.5px solid var(--border2);color:var(--text2); }
+              .mn-admin { background:rgba(217,119,6,0.1);border:1px solid rgba(217,119,6,0.4);color:var(--amber); }
+              .mn-bank  { background:rgba(13,148,136,0.1);border:1px solid rgba(13,148,136,0.4);color:var(--teal); }
+              .mn-page  { background:var(--bg3);border:0.5px solid var(--border2);color:var(--text2);font-size:10px; }
+              .mn-sub   { background:var(--bg3);border:0.5px solid var(--border2);color:var(--text3);font-size:10px; }
+              .mn-line  { width:0.5px;background:var(--border2); }
+              .mn-hline { height:0.5px;background:var(--border2); }
+              .mn-col   { display:flex;flex-direction:column;align-items:center;gap:0; }
+              .mn-row   { display:flex;align-items:flex-start;justify-content:center;gap:0; }
+            </style>
+
+            <!-- FFG 서비스 -->
+            <div class="mn-col">
+              <div class="mn-box mn-root">FFG 서비스</div>
+              <div style="height:20px" class="mn-line"></div>
+              <div class="mn-box mn-login">로그인 &nbsp;<span style="color:var(--text3);font-size:10px">/</span></div>
+              <div style="height:20px" class="mn-line"></div>
+
+              <!-- Admin / Bank 수평 분기 -->
+              <div style="display:flex;align-items:flex-start;gap:0;width:100%">
+                <!-- Admin 측 -->
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center">
+                  <div style="height:0.5px;width:50%;background:var(--border2);margin-left:50%"></div>
+                  <div style="height:20px" class="mn-line"></div>
+                  <div class="mn-box mn-admin" style="min-width:140px">Admin</div>
+                  <div style="height:16px" class="mn-line"></div>
+                  <!-- Admin 하위 분기 -->
+                  <div class="mn-row" style="width:100%;gap:0">
+                    <!-- 관리자 대시보드 -->
+                    <div style="flex:1;display:flex;flex-direction:column;align-items:center">
+                      <div style="height:0.5px;width:50%;background:var(--border2);margin-left:50%"></div>
+                      <div style="height:12px" class="mn-line"></div>
+                      <div class="mn-box mn-page" style="flex-direction:column;gap:2px">
+                        <span>관리자 대시보드</span>
+                        <span style="color:var(--accent);font-family:var(--mono);font-size:9px">/admin</span>
+                      </div>
+                      <div style="height:8px" class="mn-line"></div>
+                      <div class="mn-box mn-sub" style="flex-direction:column;gap:2px">
+                        <span>거래 입력</span>
+                        <span style="color:var(--accent);font-family:var(--mono);font-size:9px">/admin/tx-input</span>
+                      </div>
+                    </div>
+                    <!-- 은행 대시보드 (Admin) -->
+                    <div style="flex:1;display:flex;flex-direction:column;align-items:center">
+                      <div style="height:0.5px;width:50%;background:var(--border2);margin-right:50%"></div>
+                      <div style="height:12px" class="mn-line"></div>
+                      <div class="mn-box mn-page" style="flex-direction:column;gap:2px">
+                        <span>은행 대시보드</span>
+                        <span style="color:var(--accent);font-family:var(--mono);font-size:9px">/bank/:bankCode</span>
+                      </div>
+                      <div style="height:8px" class="mn-line"></div>
+                      <div class="mn-box mn-sub" style="flex-direction:column;gap:2px">
+                        <span>고객 상세</span>
+                        <span style="color:var(--accent);font-family:var(--mono);font-size:9px">/customer/:userId</span>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 공통 메뉴 점선 -->
+                  <div style="height:16px" class="mn-line" style="border-left:1px dashed var(--border2)"></div>
+                  <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start;padding:10px 16px;background:var(--bg3);border:0.5px dashed var(--border2);border-radius:6px;margin-top:4px">
+                    <span style="font-size:10px;color:var(--text3);margin-bottom:2px">공통 (Admin 접근)</span>
+                    <div style="display:flex;gap:6px">
+                      <span class="mn-box mn-sub">게시판</span>
+                      <span class="mn-box mn-sub">스케줄러</span>
+                      <span class="mn-box mn-sub">채팅 <span style="color:var(--text3);font-size:9px">모달</span></span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 중앙 분기선 -->
+                <div style="width:60px;display:flex;flex-direction:column;align-items:center">
+                  <div style="height:0.5px;width:100%;background:var(--border2)"></div>
+                </div>
+
+                <!-- Bank 측 -->
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center">
+                  <div style="height:0.5px;width:50%;background:var(--border2);margin-right:50%"></div>
+                  <div style="height:20px" class="mn-line"></div>
+                  <div class="mn-box mn-bank" style="min-width:140px">Bank</div>
+                  <div style="height:16px" class="mn-line"></div>
+                  <!-- Bank 하위 분기 -->
+                  <div class="mn-row" style="width:100%;gap:0">
+                    <div style="flex:1;display:flex;flex-direction:column;align-items:center">
+                      <div style="height:0.5px;width:50%;background:var(--border2);margin-left:50%"></div>
+                      <div style="height:12px" class="mn-line"></div>
+                      <div class="mn-box mn-page" style="flex-direction:column;gap:2px">
+                        <span>은행 대시보드</span>
+                        <span style="color:var(--teal);font-family:var(--mono);font-size:9px">자행만</span>
+                      </div>
+                      <div style="height:8px" class="mn-line"></div>
+                      <div class="mn-box mn-sub" style="flex-direction:column;gap:2px">
+                        <span>고객 상세</span>
+                        <span style="color:var(--teal);font-family:var(--mono);font-size:9px">자행만</span>
+                      </div>
+                    </div>
+                    <div style="flex:1;display:flex;flex-direction:column;align-items:center">
+                      <div style="height:0.5px;width:50%;background:var(--border2);margin-right:50%"></div>
+                      <div style="height:12px" class="mn-line"></div>
+                      <div class="mn-box mn-page" style="flex-direction:column;gap:2px">
+                        <span>게시판</span>
+                        <span style="color:var(--text3);font-size:9px">공통</span>
+                      </div>
+                      <div style="height:8px" class="mn-line"></div>
+                      <div class="mn-box mn-sub" style="flex-direction:column;gap:2px">
+                        <span>채팅</span>
+                        <span style="color:var(--text3);font-size:9px">공통</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- 범례 -->
+            <div style="display:flex;gap:16px;margin-top:20px;padding-top:14px;border-top:0.5px solid var(--border)">
+              <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2)"><div style="width:10px;height:10px;border-radius:2px;background:var(--accent-dim);border:1px solid var(--accent)"></div>서비스 루트</div>
+              <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2)"><div style="width:10px;height:10px;border-radius:2px;background:rgba(217,119,6,0.1);border:1px solid rgba(217,119,6,0.4)"></div>Admin 전용</div>
+              <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2)"><div style="width:10px;height:10px;border-radius:2px;background:rgba(13,148,136,0.1);border:1px solid rgba(13,148,136,0.4)"></div>Bank 전용</div>
+              <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2)"><div style="width:10px;height:10px;border-radius:2px;background:var(--bg3);border:0.5px solid var(--border2)"></div>화면 / 경로</div>
+            </div>
+          </div>
+        </div>
+      </div>
             <defs>
               <marker id="marr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                 <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -682,8 +811,93 @@
 
       <div class="sec">
         <div class="sec-title">사용자 흐름 (User Flow)</div>
-        <div style="overflow-x:auto;background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:16px">
-          <svg width="100%" viewBox="0 0 1080 320" style="min-width:860px">
+        <div style="overflow-x:auto;background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:24px 20px">
+          <div style="min-width:700px">
+            <style>
+              .fl-node { display:inline-flex;align-items:center;justify-content:center;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:500;white-space:nowrap;flex-direction:column;gap:2px;text-align:center; }
+              .fl-blue   { background:var(--accent-dim);border:1px solid var(--accent);color:var(--accent); }
+              .fl-coral  { background:rgba(216,90,48,0.1);border:1px solid rgba(216,90,48,0.4);color:#D85A30; }
+              .fl-green  { background:rgba(99,153,34,0.1);border:1px solid rgba(99,153,34,0.4);color:#3B6D11; }
+              .fl-gray   { background:var(--bg3);border:0.5px solid var(--border2);color:var(--text); }
+              .fl-purple { background:rgba(127,119,221,0.1);border:1px solid rgba(127,119,221,0.4);color:#534AB7; }
+              .fl-arr    { color:var(--text3);font-size:14px;padding:0 6px;align-self:center; }
+              .fl-sub    { font-size:10px;font-weight:400;color:inherit;opacity:0.75; }
+              .fl-row    { display:flex;align-items:center;gap:0; }
+              .fl-vline  { width:0.5px;height:20px;background:var(--border2);margin:0 auto; }
+              .fl-hline  { height:0.5px;background:var(--border2); }
+            </style>
+
+            <!-- 1행: 로그인 → 분기 → admin/bank 경로 -->
+            <div style="display:flex;align-items:flex-start;gap:0;margin-bottom:16px">
+              <!-- 로그인 -->
+              <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:28px">
+                <div class="fl-node fl-blue">로그인</div>
+              </div>
+              <div class="fl-arr">→</div>
+
+              <!-- 분기 -->
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <!-- admin 경로 -->
+                <div class="fl-row">
+                  <div class="fl-node fl-coral">
+                    <span>role == admin</span>
+                    <span class="fl-sub">관리자</span>
+                  </div>
+                  <div class="fl-arr">→</div>
+                  <div class="fl-node fl-gray">
+                    <span>관리자 대시보드</span>
+                    <span class="fl-sub" style="color:var(--accent);font-family:var(--mono)">/admin</span>
+                  </div>
+                  <div class="fl-arr">→</div>
+                  <div class="fl-node fl-gray">
+                    <span>은행 선택</span>
+                    <span class="fl-sub">드롭다운</span>
+                  </div>
+                </div>
+                <!-- bank 경로 -->
+                <div class="fl-row">
+                  <div class="fl-node fl-green">
+                    <span>role == bank</span>
+                    <span class="fl-sub">은행 사용자</span>
+                  </div>
+                  <div class="fl-arr">→</div>
+                  <div class="fl-node fl-gray">
+                    <span>은행 대시보드</span>
+                    <span class="fl-sub" style="color:var(--teal);font-family:var(--mono)">/bank/:bankCode (자행만)</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="fl-arr" style="padding-top:28px">→</div>
+
+              <!-- 공통 이후 흐름 -->
+              <div style="display:flex;flex-direction:column;align-items:center;padding-top:20px">
+                <div class="fl-row">
+                  <div class="fl-node fl-gray">
+                    <span>이상 거래 목록</span>
+                  </div>
+                  <div class="fl-arr">→</div>
+                  <div class="fl-node fl-gray">
+                    <span>고객 클릭</span>
+                    <span class="fl-sub">상세 이동</span>
+                  </div>
+                </div>
+                <div class="fl-vline"></div>
+                <div class="fl-node fl-purple" style="width:100%">
+                  <span>고객 상세 페이지</span>
+                  <span class="fl-sub">AI 예측 + SHAP 시각화</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 공통 사이드바 노트 -->
+            <div style="display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:0.5px dashed var(--border2);border-radius:6px;font-size:11px;color:var(--text3)">
+              <span style="font-weight:500;color:var(--text2)">공통 사이드바</span>
+              게시판 · 스케줄러 · 채팅 — 어느 페이지에서든 접근 가능
+            </div>
+          </div>
+        </div>
+      </div>
             <defs>
               <marker id="farr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                 <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
