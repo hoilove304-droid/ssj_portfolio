@@ -500,6 +500,36 @@
         </div>
       </div>
 
+      <div class="div"></div>
+
+      <div class="sec">
+        <div class="sec-title">기술적 성과</div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:8px">
+          <div class="result-card"><div class="result-emoji">🏗️</div><div class="result-title">아키텍처</div><div class="result-desc">3-tier 서버 분리 (React / Spring Boot / Flask) 설계 및 구현</div></div>
+          <div class="result-card"><div class="result-emoji">🤖</div><div class="result-title">AI 파이프라인</div><div class="result-desc">XGBoost + SHAP End-to-End 파이프라인 직접 구현</div></div>
+          <div class="result-card"><div class="result-emoji">🗄️</div><div class="result-title">DB</div><div class="result-desc">Oracle 계층형 쿼리, ROWNUM 페이징 실무 적용</div></div>
+          <div class="result-card"><div class="result-emoji">🔒</div><div class="result-title">설계</div><div class="result-desc">Route Guard 3종 기반 권한 분리, DTO Request/Response 분리 패턴</div></div>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">배운 점</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:12px 16px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start">
+            <div style="width:22px;height:22px;border-radius:50%;background:var(--accent-dim);border:0.5px solid rgba(37,99,235,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:var(--accent);flex-shrink:0;margin-top:2px">1</div>
+            <div><div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px">구조 이해</div><div style="font-size:12px;color:var(--text2);line-height:1.6">Controller → Service → Mapper 계층 분리를 지키면 유지보수와 역할 분리가 명확해진다는 것을 직접 경험</div></div>
+          </div>
+          <div style="background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:12px 16px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start">
+            <div style="width:22px;height:22px;border-radius:50%;background:var(--accent-dim);border:0.5px solid rgba(37,99,235,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:var(--accent);flex-shrink:0;margin-top:2px">2</div>
+            <div><div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px">데이터 흐름 이해</div><div style="font-size:12px;color:var(--text2);line-height:1.6">React → Spring → Flask → DB 전 구간을 추적하며 시스템 전체를 보는 시각 습득</div></div>
+          </div>
+          <div style="background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:12px 16px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start">
+            <div style="width:22px;height:22px;border-radius:50%;background:var(--accent-dim);border:0.5px solid rgba(37,99,235,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:var(--accent);flex-shrink:0;margin-top:2px">3</div>
+            <div><div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px">문제 해결 경험</div><div style="font-size:12px;color:var(--text2);line-height:1.6">CORS, float32 직렬화, ROWNUM 페이징 오류를 원인부터 분석해서 직접 해결</div></div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -1258,41 +1288,6 @@
         </div>
       </div>
 
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════
-       공통 하단: 트러블슈팅 + 성과
-  ═══════════════════════════════ -->
-  <div class="content" style="padding-bottom:0">
-    <div class="div" style="margin-top:32px"></div>
-
-    <div class="sec">
-      <div class="sec-title">기술적 성과</div>
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:8px">
-        <div class="result-card"><div class="result-emoji">🏗️</div><div class="result-title">아키텍처</div><div class="result-desc">3-tier 서버 분리 (React / Spring Boot / Flask) 설계 및 구현</div></div>
-        <div class="result-card"><div class="result-emoji">🤖</div><div class="result-title">AI 파이프라인</div><div class="result-desc">XGBoost + SHAP End-to-End 파이프라인 직접 구현</div></div>
-        <div class="result-card"><div class="result-emoji">🗄️</div><div class="result-title">DB</div><div class="result-desc">Oracle 계층형 쿼리, ROWNUM 페이징 실무 적용</div></div>
-        <div class="result-card"><div class="result-emoji">🔒</div><div class="result-title">설계</div><div class="result-desc">Route Guard 3종 기반 권한 분리, DTO Request/Response 분리 패턴</div></div>
-      </div>
-    </div>
-
-    <div class="sec">
-      <div class="sec-title">배운 점</div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <div style="background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:12px 16px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start">
-          <div style="width:22px;height:22px;border-radius:50%;background:var(--accent-dim);border:0.5px solid rgba(37,99,235,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:var(--accent);flex-shrink:0;margin-top:2px">1</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px">구조 이해</div><div style="font-size:12px;color:var(--text2);line-height:1.6">Controller → Service → Mapper 계층 분리를 지키면 유지보수와 역할 분리가 명확해진다는 것을 직접 경험</div></div>
-        </div>
-        <div style="background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:12px 16px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start">
-          <div style="width:22px;height:22px;border-radius:50%;background:var(--accent-dim);border:0.5px solid rgba(37,99,235,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:var(--accent);flex-shrink:0;margin-top:2px">2</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px">데이터 흐름 이해</div><div style="font-size:12px;color:var(--text2);line-height:1.6">React → Spring → Flask → DB 전 구간을 추적하며 시스템 전체를 보는 시각 습득</div></div>
-        </div>
-        <div style="background:var(--surface);border:0.5px solid var(--border);border-radius:var(--radius);padding:12px 16px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start">
-          <div style="width:22px;height:22px;border-radius:50%;background:var(--accent-dim);border:0.5px solid rgba(37,99,235,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:var(--accent);flex-shrink:0;margin-top:2px">3</div>
-          <div><div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px">문제 해결 경험</div><div style="font-size:12px;color:var(--text2);line-height:1.6">CORS, float32 직렬화, ROWNUM 페이징 오류를 원인부터 분석해서 직접 해결</div></div>
-        </div>
-      </div>
     </div>
   </div>
 
