@@ -42,14 +42,19 @@
 .screen-tag { font-size: 10px; padding: 2px 7px; border-radius: 4px; background: var(--bg3); border: 0.5px solid var(--border); color: var(--text3); font-family: var(--mono); }
 
 .upload-note {
-  background: rgba(79,142,247,0.06);
-  border: 0.5px solid rgba(79,142,247,0.2);
+  background: rgba(37,99,235,0.06);
+  border: 0.5px solid rgba(37,99,235,0.2);
   border-radius: var(--radius);
   padding: 14px 18px;
   font-size: 12px; color: var(--text2); line-height: 1.7;
   margin-bottom: 24px;
 }
-.upload-note strong { color: var(--accent2); }
+.upload-note strong { color: var(--accent); }
+
+@media (max-width: 768px) {
+  .page-header { padding: 32px 16px 20px; }
+  .screens-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>

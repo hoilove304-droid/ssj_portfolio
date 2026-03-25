@@ -9,7 +9,7 @@
 /* ── HERO ── */
 .hero {
   position: relative;
-  padding: 56px 32px 48px;
+  padding: 64px 40px 52px;
   overflow: hidden;
   background: #0f172a;
   border-bottom: 1px solid rgba(255,255,255,0.06);
@@ -411,6 +411,23 @@
 }
 .learned-title { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
 .learned-desc  { font-size: 11px; color: var(--text2); line-height: 1.6; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .hero { padding: 44px 20px 36px; }
+  .hero h1 { font-size: 28px; }
+  .overview-grid { grid-template-columns: 1fr; }
+  .ps-grid { grid-template-columns: 1fr; }
+  .persona-grid { grid-template-columns: 1fr; }
+  .arch-3tier { grid-template-columns: 1fr; gap: 6px; }
+  .arch-arrow-col { display: none; }
+  .mvc-row { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .dto-grid { grid-template-columns: 1fr; }
+  .retro-grid { grid-template-columns: 1fr; }
+  .tech-table, .auth-table, .api-table, .ai-rule-table { font-size: 11px; }
+  .tech-table th, .auth-table th, .api-table th, .ai-rule-table th,
+  .tech-table td, .auth-table td, .api-table td, .ai-rule-table td { padding: 7px 8px; }
+}
 
 /* ── CLOSING ── */
 .closing {
