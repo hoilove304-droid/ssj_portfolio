@@ -15,6 +15,7 @@
   background: linear-gradient(135deg, #1e2d4a 0%, #1a3a5c 50%, #1e2d4a 100%);
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
+.hero-wrap { max-width: 980px; margin: 0 auto; position: relative; }
 .hero-bg {
   position: absolute; inset: 0; pointer-events: none;
   background:
@@ -46,11 +47,16 @@
 /* ── SUB TAB NAV ── */
 .sub-nav {
   background: var(--surface); border-bottom: 1px solid var(--border);
-  padding: 0 40px; display: flex; gap: 0;
+  padding: 0; display: flex; gap: 0;
   position: sticky; top: 52px; z-index: 100;
   overflow-x: auto;
 }
 .sub-nav::-webkit-scrollbar { display: none; }
+.sub-nav-inner {
+  display: flex; gap: 0;
+  max-width: 980px; width: 100%; margin: 0 auto;
+  padding: 0 40px;
+}
 .sub-tab {
   font-size: 13px; font-weight: 400; color: var(--text3);
   padding: 0 18px; height: 46px; line-height: 46px;
@@ -67,7 +73,7 @@
 .tab-panel.active { display: block; }
 
 /* ── CONTENT ── */
-.content { padding: 32px 40px 0; }
+.content { padding: 32px 40px 0; max-width: 980px; margin: 0 auto; }
 
 /* ── SEC ── */
 .sec { margin-bottom: 28px; }
@@ -296,7 +302,7 @@
 .shap-dot { width:8px; height:8px; border-radius:2px; }
 
 /* ── CLOSING ── */
-.closing { text-align:center; padding:40px 20px; border-top:1px solid var(--border); margin-top:32px; }
+.closing { text-align:center; padding:40px 20px; border-top:1px solid var(--border); margin-top:32px; max-width:980px; margin-left:auto; margin-right:auto; }
 .closing h2 { font-size:22px; font-weight:300; color:var(--text); margin-bottom:8px; letter-spacing:-0.5px; }
 .closing h2 span { color:var(--accent); font-weight:500; }
 .closing p { font-size:13px; color:var(--text2); margin-bottom:20px; line-height:1.8; }
@@ -340,6 +346,7 @@
   <!-- HERO -->
   <div class="hero">
     <div class="hero-bg"></div>
+    <div class="hero-wrap">
     <div class="hero-tag">팀 프로젝트 · 2026.01.30 – 2026.03.25</div>
     <h1><strong>FIN FLOW</strong> <span class="hl">GUARD</span></h1>
     <div class="hero-sub">금융 거래 이상 감지 AI 웹 서비스 &nbsp;·&nbsp; 3인 팀 &nbsp;·&nbsp; 프론트엔드 리드 &amp; PM</div>
@@ -352,10 +359,12 @@
       <span class="badge b-oracle">Oracle XE</span>
       <span class="badge b-mybatis">MyBatis</span>
     </div>
+    </div>
   </div>
 
   <!-- 서브 탭 네비 -->
   <div class="sub-nav">
+    <div class="sub-nav-inner">
     <button class="sub-tab active" onclick="switchTab('plan',this)">기획</button>
     <button class="sub-tab" onclick="switchTab('arch',this)">설계·구조</button>
     <button class="sub-tab" onclick="switchTab('dashboard',this)">대시보드</button>
@@ -363,6 +372,7 @@
     <button class="sub-tab" onclick="switchTab('ai',this)">AI 분석</button>
     <button class="sub-tab" onclick="switchTab('chat',this)">채팅</button>
     <button class="sub-tab" onclick="switchTab('board',this)">게시판</button>
+    </div>
   </div>
 
   <!-- ═══════════════════════════════
