@@ -46,7 +46,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.6;
   min-height: 100vh;
 }
@@ -86,11 +86,11 @@ body {
 .nav ul li a.active { color: #93c5fd; border-bottom-color: #3b82f6; }
 
 /* ── LAYOUT ── */
-.page { padding: 72px 0 60px; max-width: 1100px; margin: 0 auto; }
+.page { padding: 72px 0 60px; max-width: 980px; margin: 0 auto; }
 .inner { padding: 0 40px; }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 1140px) {
+@media (max-width: 1020px) {
   .page { padding: 72px 20px 60px; }
   .inner { padding: 0 20px; }
 }
