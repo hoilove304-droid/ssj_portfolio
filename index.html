@@ -921,7 +921,7 @@
             </ul>
             <div class="sub-label">기술 포인트</div>
             <ul class="tech-list">
-              <li>Controller 1차 검증(null/빈값) + Service 2차 검증(비즈니스 규칙)으로 이중 방어 처리</li>
+              <li>Controller에서 필드별 null/빈값 + 금액 양수 여부까지 단계별 검증 후 저장 — TxDataService는 mapper 단순 위임</li>
               <li>TO_DATE(#{txDatetime}, 'YYYY-MM-DD"T"HH24:MI') — ISO 8601 형식 날짜 Oracle 파싱</li>
               <li>fraudScore 초기 0 저장 후 Flask 예측 결과로 UPDATE 처리하여 응답 지연 분리</li>
             </ul>
@@ -1005,7 +1005,7 @@
           </div>
           <div class="feat-card-body">
             <ul class="impl-list">
-              <li>FullCalendar 라이브러리를 활용한 월간/주간/일간 뷰 전환 일정 UI 구현</li>
+              <li>FullCalendar(dayGridPlugin) 기반 월간 캘린더 UI 구현 — prev/next/today 네비게이션, 일정 클릭·날짜 클릭 인터랙션</li>
               <li>일정 등록: 날짜 클릭 시 모달 오픈, 제목/내용/시작일시/종료일시 + 종일 일정(allDay) 여부 입력 후 등록</li>
               <li>일정 수정: 캘린더 이벤트 클릭 시 기존 데이터 로드하여 수정 가능</li>
               <li>일정 삭제: 상세 모달에서 삭제 버튼 클릭 시 확인 후 제거</li>
@@ -1021,7 +1021,7 @@
             <div class="tbl-wrap">
               <table class="tbl">
                 <tr><th style="width:90px">기능 ID</th><th>요구사항</th><th style="width:80px;text-align:center">우선순위</th></tr>
-                <tr><td class="td-mono">SCH-001</td><td>FullCalendar 기반 월간/주간/일간 뷰 전환</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">SCH-001</td><td>FullCalendar 기반 월간 캘린더 뷰 (dayGridMonth)</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
                 <tr><td class="td-mono">SCH-002</td><td>날짜 클릭 시 일정 등록 모달 오픈</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
                 <tr><td class="td-mono">SCH-003</td><td>이벤트 클릭 시 기존 데이터 로드하여 수정</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
                 <tr><td class="td-mono">SCH-004</td><td>일정 삭제 — 확인 후 제거</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
@@ -1152,7 +1152,7 @@
             <ul class="impl-list">
               <li>고객 정보 + 현재 거래 내역 + AI 예측 결과(사기 확률 %)를 한 화면에 통합 표시</li>
               <li>SHAP 바 차트(base64 PNG)로 "왜 이 거래가 이상 거래인지" 피처별 기여도 시각화</li>
-              <li>사기 확률에 따라 위험도 색상 구분 — 70% 이상 빨강, 40~70% 주황, 40% 미만 파랑</li>
+              <li>사기 확률(fraudProbability)과 isFraud 값을 함께 표시 — isFraud=true면 "사기 의심" 위험 배지, false면 "정상" 배지로 구분</li>
               <li>React(CustomerDetailPage)에서 Spring API로 고객·거래 데이터 조회 후 Flask /predict를 직접 호출하여 AI 결과를 클라이언트에서 병합</li>
               <li>Spring 서버의 buildScore()가 fraudScore 기반 시간·금액·위치·기기 영역별 점수를 계산하여 함께 반환</li>
             </ul>
@@ -1416,7 +1416,7 @@
             <div class="sub-label">기술 포인트</div>
             <ul class="tech-list">
               <li>계층형 쿼리: START WITH REFNO = 0 · CONNECT BY PRIOR BOARD_NO = REFNO · ORDER SIBLINGS BY BOARD_NO DESC</li>
-              <li>DEPTH(LEVEL - 1)를 프론트에서 받아 들여쓰기(padding-left: depth * 16px)로 답글 시각화</li>
+              <li>DEPTH(LEVEL - 1)를 프론트에서 받아 들여쓰기(padding-left: depth * 20px)로 답글 시각화</li>
               <li>role 기반 버튼 조건부 렌더링 — localStorage의 role 값을 컴포넌트에서 직접 읽어 관리자/은행 사용자별 글쓰기·수정 버튼 표시 분기</li>
             </ul>
             <div class="sub-label">요구사항 정의서 발췌</div>
