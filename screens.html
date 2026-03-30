@@ -8,60 +8,45 @@
 <link rel="stylesheet" href="assets/nav.css">
 <style>
 
-/* ── 섹션 색상 팔레트 ── */
 :root {
-  --c-auth:   #2563eb;
-  --c-dash:   #0d9488;
-  --c-ai:     #7c3aed;
-  --c-board:  #d97706;
-  --c-etc:    #059669;
+  --c-auth:  #2563eb;
+  --c-dash:  #0d9488;
+  --c-ai:    #7c3aed;
+  --c-board: #d97706;
+  --c-etc:   #059669;
 }
 
-/* ── 페이지 헤더 ── */
 .page-header {
   padding: 44px 40px 32px;
   border-bottom: 0.5px solid var(--border);
 }
-.page-header h1 {
-  font-size: 26px; font-weight: 300;
-  color: var(--text); letter-spacing: -0.6px; margin-bottom: 6px;
-}
+.page-header h1 { font-size: 26px; font-weight: 300; color: var(--text); letter-spacing: -0.6px; margin-bottom: 6px; }
 .page-header h1 strong { font-weight: 600; }
 .page-header p { font-size: 13px; color: var(--text2); }
 
 /* ── 섹션 ── */
-.screen-section {
-  padding: 40px;
-  border-bottom: 0.5px solid var(--border);
-}
+.screen-section { padding: 40px; border-bottom: 0.5px solid var(--border); }
 .screen-section:last-child { border-bottom: none; }
 
-/* 섹션 배경 */
 .sec-auth  { background: rgba(37,99,235,0.04); }
 .sec-dash  { background: rgba(13,148,136,0.04); }
 .sec-ai    { background: rgba(124,58,237,0.04); }
 .sec-board { background: rgba(217,119,6,0.04); }
 .sec-etc   { background: rgba(5,150,105,0.04); }
 
-/* ── 섹션 헤더 ── */
-.sec-header {
-  display: flex; align-items: center; gap: 12px;
-  margin-bottom: 24px;
-}
+.sec-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
 .sec-badge {
-  font-size: 10px; font-weight: 700;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  padding: 5px 13px; border-radius: 99px; border: 1px solid;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 5px 13px; border-radius: 99px; border: 1px solid;
 }
 .sec-auth  .sec-badge { color: var(--c-auth);  background: rgba(37,99,235,0.08);  border-color: rgba(37,99,235,0.3); }
 .sec-dash  .sec-badge { color: var(--c-dash);  background: rgba(13,148,136,0.08); border-color: rgba(13,148,136,0.3); }
 .sec-ai    .sec-badge { color: var(--c-ai);    background: rgba(124,58,237,0.08); border-color: rgba(124,58,237,0.3); }
 .sec-board .sec-badge { color: var(--c-board); background: rgba(217,119,6,0.08);  border-color: rgba(217,119,6,0.3); }
 .sec-etc   .sec-badge { color: var(--c-etc);   background: rgba(5,150,105,0.08);  border-color: rgba(5,150,105,0.3); }
-
 .sec-count { font-size: 11px; color: var(--text3); font-family: var(--mono); }
 
-/* ── 카드 — 1열 풀 와이드 ── */
+/* ── 카드 ── */
 .screen-card {
   background: var(--surface);
   border: 0.5px solid var(--border);
@@ -71,73 +56,46 @@
   transition: box-shadow .2s, border-color .2s;
 }
 .screen-card:last-child { margin-bottom: 0; }
-.screen-card:hover {
-  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
-  border-color: var(--border2);
-}
+.screen-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.08); border-color: var(--border2); }
 
-/* 카드 왼쪽 컬러 강조선 */
 .sec-auth  .screen-card { border-left: 3px solid rgba(37,99,235,0.4); }
 .sec-dash  .screen-card { border-left: 3px solid rgba(13,148,136,0.4); }
 .sec-ai    .screen-card { border-left: 3px solid rgba(124,58,237,0.4); }
 .sec-board .screen-card { border-left: 3px solid rgba(217,119,6,0.4); }
 .sec-etc   .screen-card { border-left: 3px solid rgba(5,150,105,0.4); }
 
-/* ── 이미지 — 풀 와이드, 자동 높이 ── */
-.screen-img {
-  width: 100%;
-  border-bottom: 0.5px solid var(--border);
-  line-height: 0;
-  background: var(--bg3);
-}
-.screen-img img {
-  width: 100%; height: auto;
-  display: block;
-}
-
-/* ── 카드 하단 정보 ── */
+/* ── 정보 영역 (이미지 위) ── */
 .screen-info {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 20px;
+  display: flex; align-items: flex-start;
+  justify-content: space-between; gap: 20px;
   padding: 18px 24px;
+  border-bottom: 0.5px solid var(--border);
 }
 .screen-info-left { flex: 1; min-width: 0; }
 .screen-info-right {
   display: flex; flex-wrap: wrap; gap: 5px;
   justify-content: flex-end;
-  flex-shrink: 0; max-width: 300px;
-  align-self: center;
+  flex-shrink: 0; max-width: 300px; align-self: center;
 }
 
-.screen-num {
-  font-size: 10px; font-family: var(--mono);
-  color: var(--text3); margin-bottom: 4px;
-}
-.screen-name {
-  font-size: 15px; font-weight: 500;
-  color: var(--text); letter-spacing: -0.3px;
-  margin-bottom: 5px;
-}
-.screen-desc {
-  font-size: 12px; color: var(--text2); line-height: 1.75;
-}
+.screen-num { font-size: 10px; font-family: var(--mono); color: var(--text3); margin-bottom: 4px; }
+.screen-name { font-size: 15px; font-weight: 500; color: var(--text); letter-spacing: -0.3px; margin-bottom: 5px; }
+.screen-desc { font-size: 12px; color: var(--text2); line-height: 1.75; }
 
 /* ── 태그 ── */
-.screen-tag {
-  font-size: 10px; padding: 3px 9px; border-radius: 5px;
-  font-family: var(--mono); white-space: nowrap;
-  border: 0.5px solid;
-}
+.screen-tag { font-size: 10px; padding: 3px 9px; border-radius: 5px; font-family: var(--mono); white-space: nowrap; border: 0.5px solid; }
 .sec-auth  .screen-tag { color: var(--c-auth);  background: rgba(37,99,235,0.07);  border-color: rgba(37,99,235,0.2); }
 .sec-dash  .screen-tag { color: var(--c-dash);  background: rgba(13,148,136,0.07); border-color: rgba(13,148,136,0.2); }
 .sec-ai    .screen-tag { color: var(--c-ai);    background: rgba(124,58,237,0.07); border-color: rgba(124,58,237,0.2); }
 .sec-board .screen-tag { color: var(--c-board); background: rgba(217,119,6,0.07);  border-color: rgba(217,119,6,0.2); }
 .sec-etc   .screen-tag { color: var(--c-etc);   background: rgba(5,150,105,0.07);  border-color: rgba(5,150,105,0.2); }
 
+/* ── 이미지 (정보 아래) ── */
+.screen-img { width: 100%; line-height: 0; background: var(--bg3); }
+.screen-img img { width: 100%; height: auto; display: block; }
+
 @media (max-width: 768px) {
-  .page-header  { padding: 32px 20px 24px; }
+  .page-header { padding: 32px 20px 24px; }
   .screen-section { padding: 28px 20px; }
   .screen-info { flex-direction: column; gap: 12px; }
   .screen-info-right { justify-content: flex-start; max-width: 100%; }
@@ -158,22 +116,17 @@
 </nav>
 
 <div class="page">
-
   <div class="page-header">
     <h1>FIN FLOW <strong>GUARD</strong> — 구현 화면</h1>
     <p>프로젝트 주요 화면 캡처 · 총 9개 화면</p>
   </div>
 
-  <!-- ① 인증 & 권한 -->
   <div class="screen-section sec-auth">
     <div class="sec-header">
       <span class="sec-badge">인증 &amp; 권한</span>
       <span class="sec-count">01 / 05</span>
     </div>
     <div class="screen-card">
-      <div class="screen-img">
-        <img src="assets/screenshots/login.png" alt="로그인 화면">
-      </div>
       <div class="screen-info">
         <div class="screen-info-left">
           <div class="screen-num">SCREEN 01</div>
@@ -181,24 +134,21 @@
           <div class="screen-desc">은행코드 + 아이디 + 비밀번호 입력 폼. role에 따라 /admin 또는 /bank/:bankCode로 자동 분기. localStorage에 memberId · role · bankCode 저장.</div>
         </div>
         <div class="screen-info-right">
-          <span class="screen-tag">localStorage</span>
-          <span class="screen-tag">role 분기</span>
-          <span class="screen-tag">ProtectedRoute</span>
+          <span class="screen-tag">localStorage</span><span class="screen-tag">role 분기</span><span class="screen-tag">ProtectedRoute</span>
         </div>
+      </div>
+      <div class="screen-img">
+        <img src="assets/screenshots/login.png" alt="로그인 화면">
       </div>
     </div>
   </div>
 
-  <!-- ② 대시보드 -->
   <div class="screen-section sec-dash">
     <div class="sec-header">
       <span class="sec-badge">대시보드</span>
       <span class="sec-count">02 / 05</span>
     </div>
     <div class="screen-card">
-      <div class="screen-img">
-        <img src="assets/screenshots/admin-dashboard.png" alt="관리자 대시보드">
-      </div>
       <div class="screen-info">
         <div class="screen-info-left">
           <div class="screen-num">SCREEN 02</div>
@@ -206,17 +156,14 @@
           <div class="screen-desc">전 은행 이상 거래 통합 모니터링. 시간대별·월별 SVG 차트, 30초 폴링으로 Flask AI 분석 자동 재실행. 패턴별 고/중/저 위험도 분류.</div>
         </div>
         <div class="screen-info-right">
-          <span class="screen-tag">Admin 전용</span>
-          <span class="screen-tag">30초 폴링</span>
-          <span class="screen-tag">SVG 차트</span>
-          <span class="screen-tag">AI 연동</span>
+          <span class="screen-tag">Admin 전용</span><span class="screen-tag">30초 폴링</span><span class="screen-tag">SVG 차트</span><span class="screen-tag">AI 연동</span>
         </div>
+      </div>
+      <div class="screen-img">
+        <img src="assets/screenshots/admin-dashboard.png" alt="관리자 대시보드">
       </div>
     </div>
     <div class="screen-card">
-      <div class="screen-img">
-        <img src="assets/screenshots/bank-dashboard.png" alt="은행 대시보드">
-      </div>
       <div class="screen-info">
         <div class="screen-info-left">
           <div class="screen-num">SCREEN 03</div>
@@ -224,25 +171,21 @@
           <div class="screen-desc">자행 이상 거래 목록. BankRoute 가드로 URL 직접 입력 시 타행 접근 원천 차단. fraudScore + patternText 표시. 행 더블클릭으로 고객 상세 이동.</div>
         </div>
         <div class="screen-info-right">
-          <span class="screen-tag">BankRoute</span>
-          <span class="screen-tag">fraudScore</span>
-          <span class="screen-tag">patternText</span>
-          <span class="screen-tag">더블클릭</span>
+          <span class="screen-tag">BankRoute</span><span class="screen-tag">fraudScore</span><span class="screen-tag">patternText</span><span class="screen-tag">더블클릭</span>
         </div>
+      </div>
+      <div class="screen-img">
+        <img src="assets/screenshots/bank-dashboard.png" alt="은행 대시보드">
       </div>
     </div>
   </div>
 
-  <!-- ③ AI 분석 -->
   <div class="screen-section sec-ai">
     <div class="sec-header">
       <span class="sec-badge">AI 분석</span>
       <span class="sec-count">03 / 05</span>
     </div>
     <div class="screen-card">
-      <div class="screen-img">
-        <img src="assets/screenshots/customer-detail.png" alt="고객 상세 페이지">
-      </div>
       <div class="screen-info">
         <div class="screen-info-left">
           <div class="screen-num">SCREEN 04</div>
@@ -250,17 +193,14 @@
           <div class="screen-desc">고객 정보 + 현재 거래 + AI 예측 결과(사기 확률 %) + SHAP 바 차트를 한 화면에 통합. React → Flask /predict 직접 호출, isMountedRef로 언마운트 후 setState 방지.</div>
         </div>
         <div class="screen-info-right">
-          <span class="screen-tag">XGBoost</span>
-          <span class="screen-tag">SHAP</span>
-          <span class="screen-tag">base64 PNG</span>
-          <span class="screen-tag">isMountedRef</span>
+          <span class="screen-tag">XGBoost</span><span class="screen-tag">SHAP</span><span class="screen-tag">base64 PNG</span><span class="screen-tag">isMountedRef</span>
         </div>
+      </div>
+      <div class="screen-img">
+        <img src="assets/screenshots/customer-detail.png" alt="고객 상세 페이지">
       </div>
     </div>
     <div class="screen-card">
-      <div class="screen-img">
-        <img src="assets/screenshots/tx-input.png" alt="거래 데이터 입력">
-      </div>
       <div class="screen-info">
         <div class="screen-info-left">
           <div class="screen-num">SCREEN 05</div>
@@ -268,25 +208,21 @@
           <div class="screen-desc">12개 필드 입력 폼. 저장 버튼(DB 저장)과 AI 분석 버튼(Flask /predict 호출)이 독립 동작. Oracle 시퀀스(NEXTVAL)로 TX_ID 채번, fraudScore = 0 초기화.</div>
         </div>
         <div class="screen-info-right">
-          <span class="screen-tag">12개 필드</span>
-          <span class="screen-tag">NEXTVAL</span>
-          <span class="screen-tag">독립 버튼</span>
-          <span class="screen-tag">Admin 전용</span>
+          <span class="screen-tag">12개 필드</span><span class="screen-tag">NEXTVAL</span><span class="screen-tag">독립 버튼</span><span class="screen-tag">Admin 전용</span>
         </div>
+      </div>
+      <div class="screen-img">
+        <img src="assets/screenshots/tx-input.png" alt="거래 데이터 입력">
       </div>
     </div>
   </div>
 
-  <!-- ④ 게시판 -->
   <div class="screen-section sec-board">
     <div class="sec-header">
       <span class="sec-badge">게시판</span>
       <span class="sec-count">04 / 05</span>
     </div>
     <div class="screen-card">
-      <div class="screen-img">
-        <img src="assets/screenshots/board-list.png" alt="게시판 목록">
-      </div>
       <div class="screen-info">
         <div class="screen-info-left">
           <div class="screen-num">SCREEN 06</div>
@@ -294,17 +230,14 @@
           <div class="screen-desc">분석의뢰·공지·커뮤니티·FAQ 4종. boardConfig.js로 boardType 통합 관리. 10건씩 ROWNUM 서버 사이드 페이징. 제목 기준 키워드 검색.</div>
         </div>
         <div class="screen-info-right">
-          <span class="screen-tag">4종 게시판</span>
-          <span class="screen-tag">ROWNUM</span>
-          <span class="screen-tag">제목 검색</span>
-          <span class="screen-tag">boardConfig.js</span>
+          <span class="screen-tag">4종 게시판</span><span class="screen-tag">ROWNUM</span><span class="screen-tag">제목 검색</span><span class="screen-tag">boardConfig.js</span>
         </div>
+      </div>
+      <div class="screen-img">
+        <img src="assets/screenshots/board-list.png" alt="게시판 목록">
       </div>
     </div>
     <div class="screen-card">
-      <div class="screen-img">
-        <img src="assets/screenshots/board-reply.png" alt="계층형 답글">
-      </div>
       <div class="screen-info">
         <div class="screen-info-left">
           <div class="screen-num">SCREEN 07</div>
@@ -312,24 +245,21 @@
           <div class="screen-desc">CONNECT BY PRIOR BOARD_NO = REFNO Oracle 계층형 쿼리로 답글 트리 구조 표현. DEPTH(LEVEL-1) 기반 depth * 20px 들여쓰기로 계층 시각화.</div>
         </div>
         <div class="screen-info-right">
-          <span class="screen-tag">CONNECT BY</span>
-          <span class="screen-tag">depth * 20px</span>
-          <span class="screen-tag">ORDER SIBLINGS</span>
+          <span class="screen-tag">CONNECT BY</span><span class="screen-tag">depth * 20px</span><span class="screen-tag">ORDER SIBLINGS</span>
         </div>
+      </div>
+      <div class="screen-img">
+        <img src="assets/screenshots/board-reply.png" alt="계층형 답글">
       </div>
     </div>
   </div>
 
-  <!-- ⑤ 캘린더 & 출퇴근 & 채팅 -->
   <div class="screen-section sec-etc">
     <div class="sec-header">
       <span class="sec-badge">캘린더 &amp; 출퇴근 &amp; 채팅</span>
       <span class="sec-count">05 / 05</span>
     </div>
     <div class="screen-card">
-      <div class="screen-img">
-        <img src="assets/screenshots/scheduler.png" alt="캘린더 & 출퇴근">
-      </div>
       <div class="screen-info">
         <div class="screen-info-left">
           <div class="screen-num">SCREEN 08</div>
@@ -337,17 +267,14 @@
           <div class="screen-desc">FullCalendar(dayGridMonth) 기반 일정 CRUD. 종일 일정(allDay) 지원. 출퇴근 패널 — 서버 COUNT 쿼리로 중복 출근 방지, checkedIn / checkedOut 플래그로 3단계 상태 표시.</div>
         </div>
         <div class="screen-info-right">
-          <span class="screen-tag">FullCalendar</span>
-          <span class="screen-tag">중복 방지</span>
-          <span class="screen-tag">allDay</span>
-          <span class="screen-tag">Admin 전용</span>
+          <span class="screen-tag">FullCalendar</span><span class="screen-tag">중복 방지</span><span class="screen-tag">allDay</span><span class="screen-tag">Admin 전용</span>
         </div>
+      </div>
+      <div class="screen-img">
+        <img src="assets/screenshots/scheduler.png" alt="캘린더 & 출퇴근">
       </div>
     </div>
     <div class="screen-card">
-      <div class="screen-img">
-        <img src="assets/screenshots/chat.png" alt="채팅">
-      </div>
       <div class="screen-info">
         <div class="screen-info-left">
           <div class="screen-num">SCREEN 09</div>
@@ -355,11 +282,11 @@
           <div class="screen-desc">AppLayout에서 마운트 제어하는 전 페이지 공통 모달. role별 대화 상대 필터링(admin: 전체, bank: 자행+관리자). 2초 폴링으로 메시지 자동 갱신, IS_READ 업데이트로 읽음 처리.</div>
         </div>
         <div class="screen-info-right">
-          <span class="screen-tag">2초 폴링</span>
-          <span class="screen-tag">role 필터</span>
-          <span class="screen-tag">IS_READ</span>
-          <span class="screen-tag">공통 모달</span>
+          <span class="screen-tag">2초 폴링</span><span class="screen-tag">role 필터</span><span class="screen-tag">IS_READ</span><span class="screen-tag">공통 모달</span>
         </div>
+      </div>
+      <div class="screen-img">
+        <img src="assets/screenshots/chat.png" alt="채팅">
       </div>
     </div>
   </div>
