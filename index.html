@@ -1502,12 +1502,10 @@ function switchTab(name, btn) {
   var panel = document.getElementById('tab-' + name);
   panel.classList.add('active');
   btn.classList.add('active');
-  var subNav = document.querySelector('.sub-nav');
-  var subNavH = subNav ? subNav.offsetHeight : 0;
-  var navH = 52;
-  var panelTop = panel.getBoundingClientRect().top + window.pageYOffset;
-  window.scrollTo({ top: panelTop - navH - subNavH, behavior: 'smooth' });
-});
+  var navH = document.querySelector('.nav').offsetHeight || 52;
+  var subNavH = document.querySelector('.sub-nav').offsetHeight || 46;
+  var top = panel.getBoundingClientRect().top + window.pageYOffset - navH - subNavH;
+  window.scrollTo({ top: top, behavior: 'smooth' });
 }
 </script>
 </body>
