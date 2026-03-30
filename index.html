@@ -842,7 +842,7 @@
             <ul class="impl-list">
               <li>전체 은행 이상 거래 목록을 한 화면에서 통합 모니터링</li>
               <li>fraudScore + CASE WHEN SQL로 patternText(거래 패턴 설명) 자동 생성하여 표시</li>
-              <li>30초 폴링(POLL_INTERVAL_MS = 30,000)으로 신규 이상 거래 자동 갱신</li>
+              <li>30초 폴링(POLL_INTERVAL_MS = 30,000)으로 Flask AI 분석 자동 재실행 — 시나리오별 fraudProbability 주기적 갱신</li>
               <li>시간대별·월별 이상 거래 시각화 차트 포함, 고위험/중위험/저위험 시나리오별 분류</li>
               <li>관리자 전용 접근 제한 — ProtectedRoute로 role 검증, 비관리자 접근 시 리다이렉트</li>
             </ul>
@@ -879,7 +879,7 @@
               <li>로그인 사용자의 bankCode 기준으로 자행 데이터만 조회하는 격리된 뷰 구현</li>
               <li>BankRoute 가드로 URL 파라미터 :bankCode와 localStorage bankCode를 대조하여 타행 접근 원천 차단</li>
               <li>fraudScore 컬럼 및 패턴 텍스트로 이상 거래 위험도 직관적 확인</li>
-              <li>고객명 클릭 시 고객 상세 페이지(/bank/:bankCode/customer/:userId/tx/:txId)로 이동</li>
+              <li>이상거래 행 더블클릭(onDoubleClick)으로 고객 상세 페이지(/bank/:bankCode/customer/:userId/tx/:txId)로 이동</li>
               <li>데이터 미존재 시 Empty State UI 표시, 오류 상태와 명확히 구분</li>
             </ul>
             <div class="sub-label">기술 포인트</div>
@@ -895,7 +895,7 @@
                 <tr><th style="width:90px">기능 ID</th><th>요구사항</th><th style="width:80px;text-align:center">우선순위</th></tr>
                 <tr><td class="td-mono">BNK-001</td><td>소속 은행 기준 이상 거래 데이터 조회</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
                 <tr><td class="td-mono">BNK-002</td><td>fraudScore 및 패턴 텍스트 표시</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
-                <tr><td class="td-mono">BNK-003</td><td>고객명 클릭 시 고객 상세 페이지로 이동</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
+                <tr><td class="td-mono">BNK-003</td><td>이상거래 행 더블클릭으로 고객 상세 페이지로 이동</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
                 <tr><td class="td-mono">BNK-011</td><td>URL 조작으로 타 은행 접근 불가 — 서버 단 검증</td><td style="text-align:center"><span class="badge-yes">상</span></td></tr>
                 <tr><td class="td-mono">BNK-012</td><td>이상 거래 없을 시 Empty State UI 표시</td><td style="text-align:center"><span class="badge-part">중</span></td></tr>
               </table>
@@ -967,7 +967,7 @@
             <div class="trouble-title">CORS 오류 — React(:5173) → Spring(:8080) 교차 출처 차단</div>
             <div class="trouble-row">
               <div class="trouble-box problem"><div class="trouble-box-label">원인</div>React 개발 서버(5173)에서 Spring(8080)으로의 cross-origin 요청이 브라우저에서 차단</div>
-              <div class="trouble-box solution"><div class="trouble-box-label">해결</div>WebConfig.addCorsMappings()에 allowedOrigins("localhost:5173") 명시, /api/** 패턴 전체 등록</div>
+              <div class="trouble-box solution"><div class="trouble-box-label">해결</div>WebConfig.addCorsMappings()에 allowedOrigins("http://localhost:5173", "http://localhost:5174") 등록, /api/** 패턴 전체 허용</div>
             </div>
           </div>
         </div>
@@ -1261,7 +1261,7 @@
             </ul>
             <div class="sub-label">기술 포인트</div>
             <ul class="tech-list">
-              <li>모달 외부 클릭 시 닫기 — document 이벤트 버블링으로 모달 외부 클릭 감지</li>
+              <li>모달 외부 클릭 시 닫기 — overlay에 onClick={onClose}, 내부 panel에 e.stopPropagation()으로 클릭 이벤트 버블링 차단</li>
               <li>읽음 처리: 채팅방 진입 시 IS_READ = 0인 메시지 전체 UPDATE — 뱃지 카운트 즉시 갱신</li>
               <li>2초 폴링(setInterval 2,000ms)으로 채팅방 메시지·읽음 상태 자동 갱신 — 채팅 상대 변경 시 clearInterval로 기존 폴링 정리</li>
               <li>채팅 상태를 컴포넌트 state로 관리하여 모달 재오픈 시 이전 대화 상태 유지</li>
@@ -1372,7 +1372,7 @@
           <div class="feat-card-body">
             <ul class="impl-list">
               <li>분석의뢰 · 공지 · 커뮤니티 · FAQ 4종 게시판을 boardConfig.js 하나로 통합 관리</li>
-              <li>게시글 목록: 제목/작성자/작성일 표시, 제목·내용 기준 키워드 검색</li>
+              <li>게시글 목록: 번호/제목/작성자/조회수/등록일 표시, 제목 기준 키워드 검색</li>
               <li>ROWNUM startRow/endRow 기반 10건씩 서버 사이드 페이징 구현</li>
               <li>파일 첨부: multipart/form-data로 업로드, UUID로 파일명 저장하여 중복 방지</li>
               <li>계층형 답글: CONNECT BY PRIOR BOARD_NO = REFNO Oracle 쿼리로 트리 구조 표현</li>
