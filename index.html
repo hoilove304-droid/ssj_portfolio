@@ -769,7 +769,9 @@
             <tr><td><span class="method m-post">POST</span></td><td class="api-path">/api/chat/read</td><td>읽음 처리</td></tr>
             <tr><td><span class="method m-get">GET</span></td><td class="api-path">/api/attendance/status</td><td>출퇴근 상태 조회</td></tr>
             <tr><td><span class="method m-post">POST</span></td><td class="api-path">/api/attendance/checkin</td><td>출근 처리</td></tr>
-            <tr><td><span class="method m-get">GET</span> <span class="method m-post">POST</span></td><td class="api-path">/api/schedules</td><td>일정 조회/등록</td></tr>
+            <tr><td><span class="method m-post">POST</span></td><td class="api-path">/api/attendance/checkout</td><td>퇴근 처리</td></tr>
+            <tr><td><span class="method m-get">GET</span></td><td class="api-path">/api/attendance/logs</td><td>출퇴근 기록 전체 조회</td></tr>
+            <tr><td><span class="method m-get">GET</span> <span class="method m-post">POST</span> <span class="method m-put">PUT</span> <span class="method m-del">DEL</span></td><td class="api-path">/api/schedules, /api/schedules/{scheduleId}</td><td>일정 CRUD (조회·등록·수정·삭제)</td></tr>
             <tr><td><span class="method m-post">POST</span></td><td class="api-path">/predict &nbsp;<span class="td-sm">(Flask)</span></td><td>AI 예측</td></tr>
           </table>
         </div>
