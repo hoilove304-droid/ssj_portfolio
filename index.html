@@ -848,7 +848,7 @@
             </ul>
             <div class="sub-label">기술 포인트</div>
             <ul class="tech-list">
-              <li>CASE WHEN SQL로 거래 패턴을 텍스트로 자동 생성 — 비주요국 거래 / 심야 이체 / ATM 고액 출금 등 시나리오별 분기</li>
+              <li>CASE WHEN SQL로 거래 패턴 텍스트 자동 생성 — TX_TYPE='LOGIN' / PAYMENT+해외국가 / TRANSFER+50만원 이상 / ELSE '이상 거래 탐지' 3가지 조건 분기</li>
               <li>setInterval 기반 30초 폴링으로 컴포넌트 언마운트 시 clearInterval 처리하여 메모리 누수 방지</li>
             </ul>
             <div class="sub-label">요구사항 정의서 발췌</div>
@@ -917,13 +917,13 @@
               <li>12개 필드 입력 폼(userId, bankCode, txChannel, txType, txAmount, txDatetime, txCountry, txLocation, deviceType, deviceOs, deviceId, ipAddress)</li>
               <li>Controller에서 필드별 null / 빈값 검증 후 Oracle에 저장, fraudScore = 0으로 초기화</li>
               <li>Oracle 시퀀스(FFG_TX_DATA_SEQ.NEXTVAL)로 TX_ID 자동 채번</li>
-              <li>저장 완료 후 Flask /predict 호출하여 AI 예측 결과 DB 업데이트</li>
+              <li>저장(저장하기 버튼)과 AI 분석(AI 분석 요청 버튼)은 독립 동작 — DB 저장 시 Flask 자동 호출 없음</li>
             </ul>
             <div class="sub-label">기술 포인트</div>
             <ul class="tech-list">
               <li>Controller에서 필드별 null/빈값 + 금액 양수 여부까지 단계별 검증 후 저장 — TxDataService는 mapper 단순 위임</li>
               <li>TO_DATE(#{txDatetime}, 'YYYY-MM-DD"T"HH24:MI') — ISO 8601 형식 날짜 Oracle 파싱</li>
-              <li>fraudScore 초기 0 저장 후 Flask 예측 결과로 UPDATE 처리하여 응답 지연 분리</li>
+              <li>fraudScore는 DB 저장 시 0으로 초기화 — AI 분석은 별도 버튼으로 Flask /predict 호출 후 결과를 화면에 표시</li>
             </ul>
             <div class="sub-label">요구사항 정의서 발췌</div>
             <div class="tbl-wrap">
