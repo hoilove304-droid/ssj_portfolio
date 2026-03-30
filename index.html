@@ -1264,7 +1264,7 @@
               <li>모달 외부 클릭 시 닫기 — overlay에 onClick={onClose}, 내부 panel에 e.stopPropagation()으로 클릭 이벤트 버블링 차단</li>
               <li>읽음 처리: 채팅방 진입 시 IS_READ = 0인 메시지 전체 UPDATE — 뱃지 카운트 즉시 갱신</li>
               <li>2초 폴링(setInterval 2,000ms)으로 채팅방 메시지·읽음 상태 자동 갱신 — 채팅 상대 변경 시 clearInterval로 기존 폴링 정리</li>
-              <li>채팅 상태를 컴포넌트 state로 관리하여 모달 재오픈 시 이전 대화 상태 유지</li>
+              <li>AppLayout에서 isChatOpen state로 ChatModal 마운트/언마운트 제어 — 닫으면 언마운트, 열면 새로 마운트하여 초기 상태로 시작</li>
             </ul>
             <div class="sub-label">요구사항 정의서 발췌</div>
             <div class="tbl-wrap">
@@ -1408,8 +1408,8 @@
           </div>
           <div class="feat-card-body">
             <ul class="impl-list">
-              <li>공지사항: 상단 고정 게시글 표시, 글쓰기·수정은 관리자만 가능하도록 버튼 권한 제어</li>
-              <li>FAQ: 질문/답변 아코디언 UI, 수정 권한 관리자 제한</li>
+              <li>공지사항: boardType=4로 구분, 글쓰기 권한은 admin 또는 bank(canWrite), 수정·삭제는 admin 또는 작성자 본인(canEditOrDelete)으로 제한</li>
+              <li>FAQ: boardType=3으로 구분, 수정·삭제 권한은 admin 또는 작성자 본인(canEditOrDelete)으로 제한</li>
               <li>커뮤니티: 게시글 답글(CONNECT BY) + 파일 첨부 + 조회수</li>
               <li>분석의뢰: boardType=1로 구분되는 별도 게시판, 글쓰기·수정·삭제 권한은 작성자 본인 또는 관리자로 제한</li>
             </ul>
