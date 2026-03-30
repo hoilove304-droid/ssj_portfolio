@@ -1499,17 +1499,29 @@
 
 <script>
 function switchTab(name, btn) {
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
+  // 1. 모든 탭 패널 숨기기
+  document.querySelectorAll('.tab-panel').forEach(function(p) {
+    p.classList.remove('active');
+  });
+  // 2. 모든 탭 버튼 비활성화
+  document.querySelectorAll('.sub-tab').forEach(function(b) {
+    b.classList.remove('active');
+  });
+  // 3. 선택한 탭 활성화
   var panel = document.getElementById('tab-' + name);
+  if (!panel) return;
   panel.classList.add('active');
   btn.classList.add('active');
-  var subNav = document.querySelector('.sub-nav');
-  var subNavH = subNav ? subNav.offsetHeight : 0;
-  var navH = 52;
-  var panelTop = panel.getBoundingClientRect().top + window.pageYOffset;
-  window.scrollTo({ top: panelTop - navH - subNavH, behavior: 'smooth' });
-});
+  // 4. 스크롤 — nav + sub-nav 높이만큼 보정
+  setTimeout(function() {
+    var navEl    = document.querySelector('.nav');
+    var subNavEl = document.querySelector('.sub-nav');
+    var navH    = navEl    ? navEl.offsetHeight    : 52;
+    var subNavH = subNavEl ? subNavEl.offsetHeight : 46;
+    var rect = panel.getBoundingClientRect();
+    var top  = rect.top + window.pageYOffset - navH - subNavH;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  }, 0);
 }
 </script>
 </body>
