@@ -886,7 +886,7 @@
             <ul class="tech-list">
               <li>BankRoute: URL params의 bankCode와 localStorage 저장값을 비교 — 불일치 시 자행 대시보드로 강제 리다이렉트</li>
               <li>CustomerRoute: 은행 코드 검증 + 고객이 해당 은행 소속인지 복합 조건으로 이중 검증</li>
-              <li>은행 드롭다운 선택 시 동일 API(/api/dashboard/{bankCode}) 재호출로 데이터 전환 — 동일 컴포넌트에서 bankCode 파라미터만 교체</li>
+              <li>관리자는 은행 선택 드롭다운으로 /bank/:bankCode URL을 변경하여 각 은행 대시보드 전환 — 은행 사용자는 자행 bankCode 고정, 드롭다운 미표시</li>
               <li>fraudScore에 따라 위험도 색상 조건부 스타일링 (고위험: 빨강 / 중위험: 주황 / 저위험: 파랑)</li>
             </ul>
             <div class="sub-label">요구사항 정의서 발췌</div>
@@ -1006,7 +1006,7 @@
           <div class="feat-card-body">
             <ul class="impl-list">
               <li>FullCalendar 라이브러리를 활용한 월간/주간/일간 뷰 전환 일정 UI 구현</li>
-              <li>일정 등록: 날짜 클릭 시 모달 오픈, 제목/시작일/종료일 입력 후 등록</li>
+              <li>일정 등록: 날짜 클릭 시 모달 오픈, 제목/내용/시작일시/종료일시 + 종일 일정(allDay) 여부 입력 후 등록</li>
               <li>일정 수정: 캘린더 이벤트 클릭 시 기존 데이터 로드하여 수정 가능</li>
               <li>일정 삭제: 상세 모달에서 삭제 버튼 클릭 시 확인 후 제거</li>
               <li>사용자별 일정 조회 — userId 기준으로 본인 일정만 표시</li>
@@ -1127,10 +1127,11 @@
         <div class="tbl-wrap">
           <table class="tbl">
             <tr><th>조건</th><th style="width:130px">가중치</th></tr>
-            <tr><td>비주요국 + 10만원 이상</td><td><span class="weight-badge">+0.45</span></td></tr>
+            <tr><td>비주요국(KR·US·JP 제외) + 10만원 이상</td><td><span class="weight-badge">+0.45</span></td></tr>
             <tr><td>RU / NG 거래</td><td><span class="weight-badge">+0.40</span></td></tr>
-            <tr><td>심야(00~06시) + 이체</td><td><span class="weight-badge">+0.35</span></td></tr>
+            <tr><td>심야(00~06시) + 이체(TRANSFER)</td><td><span class="weight-badge">+0.35</span></td></tr>
             <tr><td>ATM + 50만원 이상 출금</td><td><span class="weight-badge">+0.35</span></td></tr>
+            <tr><td>심야(00~06시) + 해외(KR 외) 거래</td><td><span class="weight-badge">+0.30</span></td></tr>
             <tr><td>txAmount ≥ 500만원</td><td><span class="weight-badge">+0.25</span></td></tr>
             <tr><td style="font-weight:500;color:var(--text)">fraud_score ≥ 0.4</td><td><span class="weight-badge weight-high">→ label = 1</span></td></tr>
           </table>
@@ -1262,6 +1263,7 @@
             <ul class="tech-list">
               <li>모달 외부 클릭 시 닫기 — document 이벤트 버블링으로 모달 외부 클릭 감지</li>
               <li>읽음 처리: 채팅방 진입 시 IS_READ = 0인 메시지 전체 UPDATE — 뱃지 카운트 즉시 갱신</li>
+              <li>2초 폴링(setInterval 2,000ms)으로 채팅방 메시지·읽음 상태 자동 갱신 — 채팅 상대 변경 시 clearInterval로 기존 폴링 정리</li>
               <li>채팅 상태를 컴포넌트 state로 관리하여 모달 재오픈 시 이전 대화 상태 유지</li>
             </ul>
             <div class="sub-label">요구사항 정의서 발췌</div>
@@ -1502,10 +1504,12 @@ function switchTab(name, btn) {
   var panel = document.getElementById('tab-' + name);
   panel.classList.add('active');
   btn.classList.add('active');
-  var navH = document.querySelector('.nav').offsetHeight || 52;
-  var subNavH = document.querySelector('.sub-nav').offsetHeight || 46;
-  var top = panel.getBoundingClientRect().top + window.pageYOffset - navH - subNavH;
-  window.scrollTo({ top: top, behavior: 'smooth' });
+  var subNav = document.querySelector('.sub-nav');
+  var subNavH = subNav ? subNav.offsetHeight : 0;
+  var navH = 52;
+  var panelTop = panel.getBoundingClientRect().top + window.pageYOffset;
+  window.scrollTo({ top: panelTop - navH - subNavH, behavior: 'smooth' });
+});
 }
 </script>
 </body>
