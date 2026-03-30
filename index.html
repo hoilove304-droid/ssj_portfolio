@@ -1499,9 +1499,15 @@
 function switchTab(name, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.sub-tab').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + name).classList.add('active');
+  var panel = document.getElementById('tab-' + name);
+  panel.classList.add('active');
   btn.classList.add('active');
-  window.scrollTo({ top: document.querySelector('.sub-nav').offsetTop - 52, behavior: 'smooth' });
+  var subNav = document.querySelector('.sub-nav');
+  var subNavH = subNav ? subNav.offsetHeight : 0;
+  var navH = 52;
+  var panelTop = panel.getBoundingClientRect().top + window.pageYOffset;
+  window.scrollTo({ top: panelTop - navH - subNavH, behavior: 'smooth' });
+});
 }
 </script>
 </body>
