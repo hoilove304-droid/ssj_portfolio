@@ -850,7 +850,7 @@
             <ul class="tech-list">
               <li>CASE WHEN SQL로 거래 패턴을 텍스트로 자동 생성 — 비주요국 거래 / 심야 이체 / ATM 고액 출금 등 시나리오별 분기</li>
               <li>setInterval 기반 30초 폴링으로 컴포넌트 언마운트 시 clearInterval 처리하여 메모리 누수 방지</li>
-              <li>은행 드롭다운 선택 시 동일 API(/api/dashboard/{bankCode}) 재호출로 데이터 전환</li>
+              <li>고위험/중위험/저위험 8종 시나리오(SAMPLE_SCENARIOS) + 시간대별/월별 샘플 데이터로 AI 예측 일괄 호출 후 집계하여 차트 렌더링</li>
             </ul>
             <div class="sub-label">요구사항 정의서 발췌</div>
             <div class="tbl-wrap">
@@ -885,8 +885,8 @@
             </ul>
             <div class="sub-label">기술 포인트</div>
             <ul class="tech-list">
-              <li>BankRoute: URL params의 bankCode와 localStorage 저장값을 비교 — 불일치 시 자행 대시보드로 강제 리다이렉트</li>
-              <li>CustomerRoute: 은행 코드 검증 + 고객이 해당 은행 소속인지 복합 조건으로 이중 검증</li>
+              <li>BankRoute: role이 admin이면 모든 /bank/:bankCode 접근 허용, role이 bank면 localStorage bankCode와 URL :bankCode 일치 여부 비교 — 불일치 시 루트(/)로 리다이렉트</li>
+              <li>Admin으로 로그인 시 은행 선택 드롭다운 표시 — 선택 시 navigate(/bank/${bankCode})로 페이지 전환하여 해당 은행 데이터 조회</li>
               <li>fraudScore에 따라 위험도 색상 조건부 스타일링 (고위험: 빨강 / 중위험: 주황 / 저위험: 파랑)</li>
             </ul>
             <div class="sub-label">요구사항 정의서 발췌</div>
@@ -1083,10 +1083,10 @@
         <div class="trouble-card">
           <div class="trouble-num">02</div>
           <div>
-            <div class="trouble-title">FullCalendar 날짜 클릭 시 모달 위치 오작동</div>
+            <div class="trouble-title">FullCalendar 날짜 클릭 시 모달에 날짜 초기값 미설정</div>
             <div class="trouble-row">
-              <div class="trouble-box problem"><div class="trouble-box-label">원인</div>FullCalendar의 dateClick 이벤트 객체에서 클릭 위치(jsEvent)를 기준으로 모달을 띄우면 캘린더 밖으로 벗어나는 문제</div>
-              <div class="trouble-box solution"><div class="trouble-box-label">해결</div>모달을 화면 중앙 고정(position: fixed, top/left 50%, transform)으로 변경하여 클릭 위치와 무관하게 중앙에 표시</div>
+              <div class="trouble-box problem"><div class="trouble-box-label">원인</div>dateClick 이벤트에서 클릭한 날짜(info.dateStr)를 모달로 전달하지 않아 폼 초기값이 비어있는 문제</div>
+              <div class="trouble-box solution"><div class="trouble-box-label">해결</div>onOpenEvent({ selectedDate: info.dateStr })로 날짜를 상위 컴포넌트에 전달하고, EventModal에서 selectedDate를 받아 시작일 09:00 / 종료일 10:00로 자동 세팅</div>
             </div>
           </div>
         </div>
@@ -1289,15 +1289,15 @@
           </div>
           <div class="feat-card-body">
             <ul class="impl-list">
-              <li>관리자(Admin): 전체 유저와 채팅 가능 — 전체 사용자 목록 조회</li>
-              <li>은행 사용자: 동일 bankCode 소속 유저 + 관리자(01)만 대화 가능</li>
-              <li>프론트엔드에서 role 기반 대화 상대 목록 필터링 — 타 은행 사용자 선택 자체 차단</li>
-              <li>백엔드에서 sender_bankCode와 receiver_bankCode 대조 — 권한 없으면 메시지 전송 거부</li>
+              <li>관리자(Admin): /api/chat/users?memberId= 호출 시 서버에서 전체 유저 목록 반환</li>
+              <li>은행 사용자: 동일 bankCode 소속 유저 + 관리자(bankCode: 01)만 목록에 포함하여 반환</li>
+              <li>대화 상대 목록 자체가 서버에서 필터링되어 오므로 타 은행 사용자 선택 자체가 불가능</li>
+              <li>백엔드에서 sender와 receiver의 bankCode 대조 — 권한 없으면 메시지 전송 거부</li>
             </ul>
             <div class="sub-label">기술 포인트</div>
             <ul class="tech-list">
-              <li>localStorage의 bankCode와 role을 기준으로 채팅 가능 대상 목록 API 파라미터 분기</li>
-              <li>프론트 필터링 + 백엔드 검증 이중 구조 — URL 직접 조작 시에도 서버 단에서 차단</li>
+              <li>/api/chat/users?memberId= — 서버에서 memberId 기준으로 채팅 가능 대상만 필터링하여 반환, 프론트는 그대로 렌더링</li>
+              <li>서버 단 목록 필터링 + 메시지 전송 시 권한 재검증으로 이중 차단 구조 구현</li>
             </ul>
             <div class="sub-label">요구사항 정의서 발췌</div>
             <div class="tbl-wrap">
@@ -1317,10 +1317,10 @@
         <div class="trouble-card">
           <div class="trouble-num">01</div>
           <div>
-            <div class="trouble-title">모달 재오픈 시 채팅 상태 초기화 — 이전 대화 사라짐</div>
+            <div class="trouble-title">채팅방 전환 시 이전 대화방 메시지가 잠깐 보이는 문제</div>
             <div class="trouble-row">
-              <div class="trouble-box problem"><div class="trouble-box-label">원인</div>모달을 닫았다 재오픈 시 컴포넌트가 언마운트/마운트되어 열었던 채팅방과 메시지 내역이 초기화되는 UX 문제</div>
-              <div class="trouble-box solution"><div class="trouble-box-label">해결</div>모달 display만 토글(visibility 제어)하고 컴포넌트는 유지 — 채팅방 상태를 상위 컴포넌트 state로 끌어올려 보존</div>
+              <div class="trouble-box problem"><div class="trouble-box-label">원인</div>selectedFriend 변경 시 새 대화 내역을 불러오는 동안 이전 messages state가 그대로 남아 있어 다른 사람 메시지가 잠깐 노출</div>
+              <div class="trouble-box solution"><div class="trouble-box-label">해결</div>selectedFriend 변경 useEffect에서 markMessagesAsRead → fetchChatHistory 순서로 호출하고, 3초 폴링으로 메시지 자동 갱신하여 최신 상태 유지</div>
             </div>
           </div>
         </div>
@@ -1339,8 +1339,8 @@
       <div class="sec">
         <div class="sec-title">성과 및 배운 점</div>
         <div class="result-grid">
-          <div class="result-card"><div class="result-emoji">💬</div><div class="result-title">모달 상태 관리</div><div class="result-desc">모달 display 토글과 컴포넌트 언마운트를 분리하여 채팅 상태를 유지하는 UX 패턴 습득</div></div>
-          <div class="result-card"><div class="result-emoji">🛡️</div><div class="result-title">이중 권한 제어</div><div class="result-desc">프론트 목록 필터링 + 백엔드 검증으로 은행 간 채팅 차단을 프론트-백 양쪽에서 구현</div></div>
+          <div class="result-card"><div class="result-emoji">🔄</div><div class="result-title">폴링 기반 실시간 갱신</div><div class="result-desc">3초 폴링으로 채팅 목록·메시지를 자동 갱신하고 selectedFriend 변경 시 읽음 처리 + 대화 내역 조회를 순서대로 실행</div></div>
+          <div class="result-card"><div class="result-emoji">🛡️</div><div class="result-title">서버 단 권한 필터링</div><div class="result-desc">대화 상대 목록을 서버에서 memberId 기준으로 필터링하여 반환 — 프론트는 받은 목록을 그대로 렌더링하는 단순한 구조 유지</div></div>
           <div class="result-card"><div class="result-emoji">⚡</div><div class="result-title">낙관적 업데이트</div><div class="result-desc">API 응답 전 UI를 먼저 갱신하는 낙관적 업데이트 패턴으로 즉각적인 UX 반응성 확보</div></div>
         </div>
       </div>
@@ -1376,7 +1376,7 @@
             </ul>
             <div class="sub-label">기술 포인트</div>
             <ul class="tech-list">
-              <li>boardConfig.js: boardType별 API 경로 / 권한 / 기능(답글·파일·상태) 설정을 한 곳에서 관리하여 4종 게시판 분기</li>
+              <li>boardConfig.js: boardKey(error/community/faq/notice)별로 boardType 숫자를 매핑 — API 호출 시 boardType 파라미터로 전달하여 4종 게시판 분기</li>
               <li>ROWNUM 페이징 오류 해결: 서브쿼리에서 ORDER BY 먼저 → 외부 쿼리에서 ROWNUM 필터 적용</li>
               <li>UUID 파일명으로 동일 파일명 충돌 방지, /uploads/** 정적 경로 매핑으로 서빙</li>
             </ul>
