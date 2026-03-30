@@ -840,7 +840,7 @@
           </div>
           <div class="feat-card-body">
             <ul class="impl-list">
-              <li>전체 은행 이상 거래 목록을 한 화면에서 통합 모니터링, 은행 드롭다운으로 전환</li>
+              <li>전체 은행 이상 거래 목록을 한 화면에서 통합 모니터링</li>
               <li>fraudScore + CASE WHEN SQL로 patternText(거래 패턴 설명) 자동 생성하여 표시</li>
               <li>30초 폴링(POLL_INTERVAL_MS = 30,000)으로 신규 이상 거래 자동 갱신</li>
               <li>시간대별·월별 이상 거래 시각화 차트 포함, 고위험/중위험/저위험 시나리오별 분류</li>
@@ -850,7 +850,6 @@
             <ul class="tech-list">
               <li>CASE WHEN SQL로 거래 패턴을 텍스트로 자동 생성 — 비주요국 거래 / 심야 이체 / ATM 고액 출금 등 시나리오별 분기</li>
               <li>setInterval 기반 30초 폴링으로 컴포넌트 언마운트 시 clearInterval 처리하여 메모리 누수 방지</li>
-              <li>은행 드롭다운 선택 시 동일 API(/api/dashboard/{bankCode}) 재호출로 데이터 전환</li>
             </ul>
             <div class="sub-label">요구사항 정의서 발췌</div>
             <div class="tbl-wrap">
@@ -887,6 +886,7 @@
             <ul class="tech-list">
               <li>BankRoute: URL params의 bankCode와 localStorage 저장값을 비교 — 불일치 시 자행 대시보드로 강제 리다이렉트</li>
               <li>CustomerRoute: 은행 코드 검증 + 고객이 해당 은행 소속인지 복합 조건으로 이중 검증</li>
+              <li>은행 드롭다운 선택 시 동일 API(/api/dashboard/{bankCode}) 재호출로 데이터 전환 — 동일 컴포넌트에서 bankCode 파라미터만 교체</li>
               <li>fraudScore에 따라 위험도 색상 조건부 스타일링 (고위험: 빨강 / 중위험: 주황 / 저위험: 파랑)</li>
             </ul>
             <div class="sub-label">요구사항 정의서 발췌</div>
